@@ -4,8 +4,8 @@ import config from './webpack.config';
 const devConfig = merge(config, {
     mode: 'development',
     output: {
-        filename: 'js/[name].js',
-        chunkFilename: 'js/[name].[chunkhash].chunk.js'
+        filename: 'js/[lc-name].js',
+        chunkFilename: 'js/[lc-name].[chunkhash].chunk.js'
     }
 });
 

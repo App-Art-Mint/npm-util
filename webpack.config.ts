@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+const LowerCaseNamePlugin = require('webpack-lowercase-name');
 
 const babelConfig = {
     presets: [
@@ -15,14 +16,16 @@ const babelConfig = {
 const config: webpack.Configuration = {
     mode: 'production',
     entry: {
-        main: './src/main.ts',
+        Util: './src/ts/util.ts',
+        Selectors: './src/ts/selectors.ts',
+        Settings: './src/ts/settings.ts'
     },
     output: {
-        filename: 'js/[name].min.js',
-        chunkFilename: 'js/[name].[chunkhash].chunk.min.js',
+        filename: 'js/[lc-name].min.js',
+        chunkFilename: 'js/[lc-name].[chunkhash].chunk.min.js',
         path: path.resolve(__dirname, './dist'),
         library: {
-            name: 'sunUtil',
+            name: 'sun[name]',
             type: 'var',
             export: 'default'
         }
@@ -44,6 +47,9 @@ const config: webpack.Configuration = {
             }
         ]
     },
+    plugins: [
+        new LowerCaseNamePlugin()
+    ],
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
     }
