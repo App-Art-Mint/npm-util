@@ -1,6 +1,6 @@
 {
   "name": "@sunderapps/util",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Sunder Apps Utility Functions",
   "main": "./src/main.ts",
   "directories": {

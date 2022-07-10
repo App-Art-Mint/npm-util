@@ -53,7 +53,7 @@ export default abstract class sunSettings {
     /**
      * Updates the delay variables based on `this.delayBase` and `this.delayStep`
      */
-    private static setDelay () : void {
+    protected static setDelay () : void {
         this.delay = {
             instant: this.delayBase + this.delayStep * 0,
             fast: this.delayBase + this.delayStep * 1,

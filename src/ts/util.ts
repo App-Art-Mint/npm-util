@@ -61,6 +61,7 @@ export default abstract class n4vUtil {
      */
     static show (el?: HTMLElement | null) : void {
         if (el) {
+            el.style.display = '';
             el.style.height = `${el.scrollHeight}px`;
             setTimeout(() => {
                 el.style.height = 'auto';
@@ -84,6 +85,9 @@ export default abstract class n4vUtil {
                     el.style.height = '0px';
                 });
             });
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, sunSettings.delay.default);
         }
     }
 }
