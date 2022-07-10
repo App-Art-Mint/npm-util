@@ -102,7 +102,7 @@
   },
   "typedocOptions": {
     "entryPoints": [
-      "./src/ts/**"
+      "./src/main.ts"
     ],
     "includeVersion": true,
     "json": "docs/typedoc.json",
