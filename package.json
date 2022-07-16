@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -20,6 +20,7 @@
   },
 
   "main": "./dist/js/index.min.js",
+  "types": "./dist/js/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -34,6 +35,7 @@
   },
 
   "scripts": {
+    "prepare": "npm run build",
     "build": "npm run build:dev && npm run build:prod && npm run build:tsdoc && npm run build:sassdoc",
     "build:dev": "webpack --config webpack.dev.ts",
     "build:prod": "webpack",
@@ -44,7 +46,6 @@
     "watch:prod": "webpack --watch",
     "watch:tsdoc": "typedoc --watch",
     "serve": "webpack serve --config webpack.dev.ts",
-    "test": "karma start test/karma.conf.js",
     "clean": "rimraf dist docs"
   },
   "devDependencies": {
