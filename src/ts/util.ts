@@ -7,7 +7,7 @@ import sunSettings from "./settings";
  * Utility functions
  * @public
  */
-export default abstract class n4vUtil {
+export default abstract class sunUtil {
     /**
      * Returns the width of the window, including fractional pixels
      * @returns the width of the window
