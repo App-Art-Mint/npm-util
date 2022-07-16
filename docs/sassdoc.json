@@ -684,8 +684,8 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 423,
-            "end": 448
+            "start": 489,
+            "end": 514
           }
         }
       },
@@ -696,8 +696,8 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 423,
-            "end": 448
+            "start": 489,
+            "end": 514
           }
         }
       }
@@ -1108,6 +1108,18 @@
             "end": 401
           }
         }
+      },
+      {
+        "description": "Creates utility selectors for a given property at each breakpoint\n",
+        "context": {
+          "type": "mixin",
+          "name": "break-util",
+          "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
+          "line": {
+            "start": 441,
+            "end": 467
+          }
+        }
       }
     ]
   },
@@ -1305,21 +1317,113 @@
     "file": {
       "path": "util.scss",
       "name": "util.scss"
+    },
+    "usedBy": [
+      {
+        "description": "Creates utility selectors for a given property at each breakpoint\n",
+        "context": {
+          "type": "mixin",
+          "name": "break-util",
+          "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
+          "line": {
+            "start": 441,
+            "end": 467
+          }
+        }
+      },
+      {
+        "description": "Creates utility selectors for a given property at each breakpoint\n",
+        "context": {
+          "type": "mixin",
+          "name": "break-util",
+          "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
+          "line": {
+            "start": 441,
+            "end": 467
+          }
+        }
+      }
+    ]
+  },
+  {
+    "description": "Creates utility selectors for a given property at each breakpoint\n",
+    "commentRange": {
+      "start": 403,
+      "end": 440
+    },
+    "context": {
+      "type": "mixin",
+      "name": "break-util",
+      "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
+      "line": {
+        "start": 441,
+        "end": 467
+      }
+    },
+    "group": [
+      "mixins"
+    ],
+    "example": [
+      {
+        "type": "scss",
+        "code": "@include break-util(display, flex);     // ->   & {\n                                        //          display: flex;\n                                        //      \n                                        //          &-xs {\n                                        //              display: none;\n                                        //              @include break(xs) {\n                                        //                  display: flex;\n                                        //              }\n                                        //          }\n                                        //          &-to-xs {\n                                        //              display: flex;\n                                        //              @include break(xs) {\n                                        //                  display: none;\n                                        //              }\n                                        //          }\n                                        //          ...\n                                        //          &-xl {\n                                        //              display: none;\n                                        //              @include break(xl) {\n                                        //                  display: flex;\n                                        //              }\n                                        //          }\n                                        //          &-to-xl {\n                                        //              display: flex;\n                                        //              @include break(xl) {\n                                        //                  display: none;\n                                        //              }\n                                        //          }\n                                        //      }",
+        "description": "break-util mixin"
+      }
+    ],
+    "parameter": [
+      {
+        "type": "String",
+        "name": "prop",
+        "description": "the property to toggle"
+      },
+      {
+        "type": "Any",
+        "name": "val",
+        "description": "the active value of the property"
+      },
+      {
+        "type": "Any",
+        "name": "none",
+        "description": "the inactive value of the property"
+      }
+    ],
+    "output": "utility selectors for the given property at each breakpoint",
+    "access": "public",
+    "require": [
+      {
+        "type": "mixin",
+        "name": "break"
+      },
+      {
+        "type": "mixin",
+        "name": "break"
+      },
+      {
+        "type": "variable",
+        "name": "break"
+      }
+    ],
+    "throw": [
+      "The break-util mixin requires a string for the $prop argument."
+    ],
+    "file": {
+      "path": "util.scss",
+      "name": "util.scss"
     }
   },
   {
     "description": "Generates a property with a fluid value between specified screen sizes\n",
     "commentRange": {
-      "start": 403,
-      "end": 422
+      "start": 469,
+      "end": 488
     },
     "context": {
       "type": "mixin",
       "name": "fluid",
       "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
       "line": {
-        "start": 423,
-        "end": 448
+        "start": 489,
+        "end": 514
       }
     },
     "group": [
@@ -1336,7 +1440,7 @@
       {
         "type": "String",
         "name": "prop",
-        "description": "the key property whose value will be fluid"
+        "description": "the property whose value will be fluid"
       },
       {
         "type": "String",
@@ -1393,7 +1497,7 @@
       "value": "Number",
       "line": {
         "start": 96,
-        "end": 448
+        "end": 514
       }
     },
     "author": [

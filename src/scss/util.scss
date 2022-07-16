@@ -400,6 +400,72 @@ $break: (
     }
 }
 
+/// Creates utility selectors for a given property at each breakpoint
+/// @group Mixins
+/// 
+/// @example scss- break-util mixin
+///     @include break-util(display, flex);     // ->   & {
+///                                             //          display: flex;
+///                                             //      
+///                                             //          &-xs {
+///                                             //              display: none;
+///                                             //              @include break(xs) {
+///                                             //                  display: flex;
+///                                             //              }
+///                                             //          }
+///                                             //          &-to-xs {
+///                                             //              display: flex;
+///                                             //              @include break(xs) {
+///                                             //                  display: none;
+///                                             //              }
+///                                             //          }
+///                                             //          ...
+///                                             //          &-xl {
+///                                             //              display: none;
+///                                             //              @include break(xl) {
+///                                             //                  display: flex;
+///                                             //              }
+///                                             //          }
+///                                             //          &-to-xl {
+///                                             //              display: flex;
+///                                             //              @include break(xl) {
+///                                             //                  display: none;
+///                                             //              }
+///                                             //          }
+///                                             //      }
+///
+/// @param {String} $prop - the property to toggle
+/// @param {Any} $val - the active value of the property
+/// @param {Any} $none - the inactive value of the property
+/// @output utility selectors for the given property at each breakpoint
+@mixin break-util ($prop, $val, $none: "none") {
+    @if (type-of($prop) != 'string') {
+        @error 'The break-util mixin requires a string for the $prop argument.';
+    }
+
+    & {
+        #{$prop}: #{$val};
+
+        @each $key, $width in $break {
+            &-#{$key} {
+                #{$prop}: #{$none};
+
+                @include break($key) {
+                    #{$prop}: #{$val};
+                }
+            }
+
+            &-to-#{$key} {
+                #{$prop}: #{$val};
+
+                @include break($key) {
+                    #{$prop}: #{$none};
+                }
+            }
+        }
+    }
+}
+
 /// Generates a property with a fluid value between specified screen sizes
 /// @group Mixins
 /// 
@@ -414,7 +480,7 @@ $break: (
 ///                                                             //          }
 ///                                                             //      }
 ///  
-/// @param {String} $prop - the key property whose value will be fluid
+/// @param {String} $prop - the property whose value will be fluid
 /// @param {String} $min-vw - the minimum screen width of the fluid property
 /// @param {String} $max-vw - the maximum screen width of the fluid property
 /// @param {String} $min-size - the minimum value of the fluid property

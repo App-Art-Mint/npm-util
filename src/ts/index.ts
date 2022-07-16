@@ -7,9 +7,9 @@
 /**
  * Imports
  */
- import sunSelectors from './ts/selectors';
- import sunSettings from './ts/settings';
- import sunUtil from './ts/util';
+ import sunSelectors from './selectors';
+ import sunSettings from './settings';
+ import sunUtil from './util';
  
  /**
   * Exports

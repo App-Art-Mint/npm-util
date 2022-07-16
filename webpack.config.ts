@@ -15,7 +15,9 @@ const babelConfig = {
 
 const config: webpack.Configuration = {
     mode: 'production',
+    devtool: 'source-map',
     entry: {
+        Index: './src/ts/index.ts',
         Util: './src/ts/util.ts',
         Selectors: './src/ts/selectors.ts',
         Settings: './src/ts/settings.ts'

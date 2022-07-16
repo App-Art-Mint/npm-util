@@ -4,10 +4,20 @@
 import sunSettings from "./settings";
 
 /**
- * Utility function
+ * Utility functions
  * @public
  */
 export default abstract class n4vUtil {
+    /**
+     * Returns the width of the window, including fractional pixels
+     * @returns the width of the window
+     */
+    static windowWidth () : number {
+        let body: HTMLBodyElement = document.getElementsByTagName('body')[0],
+            decimal: number = body.getBoundingClientRect().width % 1;
+        return window.innerWidth + decimal;
+    }
+
     /**
      * Ensures that a function `func` is called at most every `wait` milliseconds with optional leading and trailing calls
      * @param func - the function to throttle
