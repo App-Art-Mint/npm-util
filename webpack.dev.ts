@@ -1,12 +1,11 @@
-import merge from 'webpack-merge';
-import config from './webpack.config';
+import webpack from 'webpack';
 
-const devConfig = merge(config, {
+const dev: webpack.Configuration = {
     mode: 'development',
     output: {
         filename: 'js/[lc-name].js',
         chunkFilename: 'js/[lc-name].[chunkhash].chunk.js'
     }
-});
+};
 
-export default devConfig;
+export default dev;

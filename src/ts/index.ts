@@ -5,18 +5,9 @@
  */
 
 /**
- * Imports
+ * Exports
  */
- import sunSelectors from './selectors';
- import sunSettings from './settings';
- import sunUtil from './util';
- 
- /**
-  * Exports
-  */
- export { 
-     sunSelectors,
-     sunSettings,
-     sunUtil
- };
- export default sunUtil;
+export { default as sunSelectors } from './selectors';
+export { default as sunSettings } from './settings';
+export { default as sunUtil } from './util';
+export { default } from './util';

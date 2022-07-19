@@ -1,7 +1,7 @@
 /**
  * Imports
  */
-import sunSettings from "./settings";
+import sunSettings from './settings';
 
 /**
  * Utility functions

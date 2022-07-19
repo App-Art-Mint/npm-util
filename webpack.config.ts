@@ -17,7 +17,6 @@ const config: webpack.Configuration = {
     mode: 'production',
     devtool: 'source-map',
     entry: {
-        Index: './src/ts/index.ts',
         Util: './src/ts/util.ts',
         Selectors: './src/ts/selectors.ts',
         Settings: './src/ts/settings.ts'
@@ -28,7 +27,7 @@ const config: webpack.Configuration = {
         path: path.resolve(__dirname, './dist'),
         library: {
             name: 'sun[name]',
-            type: 'var',
+            type: 'umd',
             export: 'default'
         }
     },
