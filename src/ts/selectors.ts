@@ -2,7 +2,7 @@
  * CSS-selector helpers
  * @public
  */
-export default abstract class sunSelectors {
+export abstract class sunSelectors {
     /**
      * The library name that will be added as a prefix
      */
@@ -64,6 +64,23 @@ export default abstract class sunSelectors {
                                 a${this.hasLink}, a${this.hasRouterLink},
                                 area${this.hasLink},
                                 ${this.tabbable}`.replace(/\s/g, '');
+
+    /**
+     * Ids
+     */
+    static ids: {[key: string]: string | {[key: string]: string}};
+
+    /**
+     * Classes
+     */
+    static classes: {[key: string]: string | {[key: string]: string}} = {
+        sides: {
+            top: this.prefix('top'),
+            right: this.prefix('right'),
+            bottom: this.prefix('bottom'),
+            left: this.prefix('left')
+        }
+    };
 
     /**
      * Adds the library prefix to the beginning of the provided string
@@ -137,4 +154,23 @@ export default abstract class sunSelectors {
     static expanded (bool?: boolean | null) : string {
         return typeof bool === 'boolean' ? `[aria-expanded="${bool}"]` : this.hasExpanded;
     }
+
+    /**
+     * Returns the id of the requested element
+     */
+    static getId (id?: string) : string {
+        return this.ids[id ?? -1] as string ?? '';
+    }
+
+    /**
+     * Returns the class of the requested element
+     */
+     static getClass (className?: string, classGroup?: string) : string {
+        if (classGroup) {
+            let group: {[key: string]: string} = this.classes[classGroup] as {[key: string]: string};
+            return group[className ?? -1] ?? '';
+        }
+        return this.classes[className ?? -1] as string ?? '';
+    }
 }
+export default sunSelectors;

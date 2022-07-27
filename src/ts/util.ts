@@ -2,12 +2,13 @@
  * Imports
  */
 import sunSettings from './settings';
+import { sunSide } from './imports/enums';
 
 /**
  * Utility functions
  * @public
  */
-export default abstract class sunUtil {
+export abstract class sunUtil {
     /**
      * Returns the width of the window, including fractional pixels
      * @returns the width of the window
@@ -69,13 +70,22 @@ export default abstract class sunUtil {
      * Sets the element's height to its `innerHeight`, then to `auto` after a delay
      * @param el - the element whose height will be set
      */
-    static show (el?: HTMLElement | null) : void {
+    static show (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
         if (el) {
             el.style.display = '';
-            el.style.height = `${el.scrollHeight}px`;
+            if (from === sunSide.Top || from === sunSide.Bottom) {
+                el.style.height = `${el.scrollHeight}px`;
+            } else {
+                el.style.width = `${el.scrollWidth}px`;
+            }
+            
             setTimeout(() => {
-                el.style.height = 'auto';
-            }, sunSettings.delay.default);
+                if (from === sunSide.Top || from === sunSide.Bottom) {
+                    el.style.height = 'auto';
+                } else {
+                    el.style.width = 'auto';
+                }
+            }, delay);
         }
     }
 
@@ -83,21 +93,32 @@ export default abstract class sunUtil {
      * Sets the element's height to 0
      * @param el - the element whose height will be set
      */
-    static hide (el?: HTMLElement | null) : void {
+    static hide (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
         if (el) {
             let height = el.scrollHeight,
+                width = el.scrollWidth,
                 transition = el.style.transition;
             el.style.transition = '';
             requestAnimationFrame(function () {
-                el.style.height = `${height}px`;
+                if (from === sunSide.Top || from === sunSide.Bottom) {
+                    el.style.height = `${height}px`;
+                } else {
+                    el.style.width = `${width}px`;
+                }
+                
                 el.style.transition = transition;
                 requestAnimationFrame(function () {
-                    el.style.height = '0px';
+                    if (from === sunSide.Top || from === sunSide.Bottom) {
+                        el.style.height = '0';
+                    } else {
+                        el.style.width = '0';
+                    }
                 });
             });
             setTimeout(() => {
                 el.style.display = 'none';
-            }, sunSettings.delay.default);
+            }, delay);
         }
     }
 }
+export default sunUtil;
