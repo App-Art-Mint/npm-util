@@ -2,16 +2,16 @@
   {
     "description": "Prefixes the provided string with the library name if it isn't already\n",
     "commentRange": {
-      "start": 140,
-      "end": 147
+      "start": 146,
+      "end": 153
     },
     "context": {
       "type": "function",
       "name": "prefix",
       "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The prefix function requires a string value.';\n    }\n\n    $base: string.to-lower-case($base);\n\n    @if (string.index($base, $pre) != 1) {\n        $base: $pre + $base;\n    }\n\n    @return $base;\n",
       "line": {
-        "start": 148,
-        "end": 160
+        "start": 154,
+        "end": 166
       }
     },
     "group": [
@@ -61,8 +61,8 @@
           "name": "css-prefix",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-prefix function requires a string value.';\n    }\n\n    @while (string.index($base, $dash) == 1) {\n        $base: string.slice($base, 2);\n    }\n\n    @return $dash + $dash + prefix($base);\n",
           "line": {
-            "start": 170,
-            "end": 180
+            "start": 176,
+            "end": 186
           }
         }
       },
@@ -73,8 +73,8 @@
           "name": "class",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The class function requires a string value.';\n    }\n\n    @return $dot + prefix($base);\n",
           "line": {
-            "start": 222,
-            "end": 228
+            "start": 228,
+            "end": 234
           }
         }
       },
@@ -85,8 +85,8 @@
           "name": "id",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The id function requires a string value.';\n    }\n\n    @return $hash + prefix($base);\n",
           "line": {
-            "start": 238,
-            "end": 244
+            "start": 244,
+            "end": 250
           }
         }
       },
@@ -97,8 +97,8 @@
           "name": "controls",
           "code": "\n    @if (type-of($id) != 'string') {\n        @error 'The controls function requires a string value.';\n    }\n\n    @return '[aria-controls=' + prefix($id) + ']';\n",
           "line": {
-            "start": 254,
-            "end": 260
+            "start": 260,
+            "end": 266
           }
         }
       }
@@ -107,16 +107,16 @@
   {
     "description": "Prefixes the provided string with two dashes and the library name if it isn't already\n",
     "commentRange": {
-      "start": 162,
-      "end": 169
+      "start": 168,
+      "end": 175
     },
     "context": {
       "type": "function",
       "name": "css-prefix",
       "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-prefix function requires a string value.';\n    }\n\n    @while (string.index($base, $dash) == 1) {\n        $base: string.slice($base, 2);\n    }\n\n    @return $dash + $dash + prefix($base);\n",
       "line": {
-        "start": 170,
-        "end": 180
+        "start": 176,
+        "end": 186
       }
     },
     "group": [
@@ -174,8 +174,8 @@
           "name": "css-var",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-var function requires a string value.';\n    }\n\n    @return var(css-prefix($base));\n",
           "line": {
-            "start": 190,
-            "end": 196
+            "start": 196,
+            "end": 202
           }
         }
       },
@@ -186,8 +186,8 @@
           "name": "css-var",
           "code": "\n    #{css-prefix($key)}: #{$val};\n",
           "line": {
-            "start": 373,
-            "end": 375
+            "start": 401,
+            "end": 403
           }
         }
       }
@@ -196,16 +196,16 @@
   {
     "description": "Creates a CSS-var call for the prefixed `$base`\n",
     "commentRange": {
-      "start": 182,
-      "end": 189
+      "start": 188,
+      "end": 195
     },
     "context": {
       "type": "function",
       "name": "css-var",
       "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-var function requires a string value.';\n    }\n\n    @return var(css-prefix($base));\n",
       "line": {
-        "start": 190,
-        "end": 196
+        "start": 196,
+        "end": 202
       }
     },
     "group": [
@@ -251,8 +251,8 @@
           "name": "css-var-ref",
           "code": "\n    @include css-var($key1, css-var($key2));\n",
           "line": {
-            "start": 386,
-            "end": 388
+            "start": 414,
+            "end": 416
           }
         }
       }
@@ -261,16 +261,16 @@
   {
     "description": "Negates a provided CSS-selector\n",
     "commentRange": {
-      "start": 198,
-      "end": 205
+      "start": 204,
+      "end": 211
     },
     "context": {
       "type": "function",
       "name": "neg",
       "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The neg function requires a string value.';\n    }\n\n    @return ':not(' + $base + ')';\n",
       "line": {
-        "start": 206,
-        "end": 212
+        "start": 212,
+        "end": 218
       }
     },
     "group": [
@@ -307,16 +307,16 @@
   {
     "description": "Creates a class selector with the library prefix\n",
     "commentRange": {
-      "start": 214,
-      "end": 221
+      "start": 220,
+      "end": 227
     },
     "context": {
       "type": "function",
       "name": "class",
       "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The class function requires a string value.';\n    }\n\n    @return $dot + prefix($base);\n",
       "line": {
-        "start": 222,
-        "end": 228
+        "start": 228,
+        "end": 234
       }
     },
     "group": [
@@ -362,16 +362,16 @@
   {
     "description": "Creates an id selector with the library prefix\n",
     "commentRange": {
-      "start": 230,
-      "end": 237
+      "start": 236,
+      "end": 243
     },
     "context": {
       "type": "function",
       "name": "id",
       "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The id function requires a string value.';\n    }\n\n    @return $hash + prefix($base);\n",
       "line": {
-        "start": 238,
-        "end": 244
+        "start": 244,
+        "end": 250
       }
     },
     "group": [
@@ -417,16 +417,16 @@
   {
     "description": "Creates an aria-controls selector with the library prefix\n",
     "commentRange": {
-      "start": 246,
-      "end": 253
+      "start": 252,
+      "end": 259
     },
     "context": {
       "type": "function",
       "name": "controls",
       "code": "\n    @if (type-of($id) != 'string') {\n        @error 'The controls function requires a string value.';\n    }\n\n    @return '[aria-controls=' + prefix($id) + ']';\n",
       "line": {
-        "start": 254,
-        "end": 260
+        "start": 260,
+        "end": 266
       }
     },
     "group": [
@@ -468,16 +468,16 @@
   {
     "description": "Creates an aria-expanded selector\n",
     "commentRange": {
-      "start": 262,
-      "end": 269
+      "start": 268,
+      "end": 275
     },
     "context": {
       "type": "function",
       "name": "expanded",
       "code": "\n    @if (type-of($bool) == 'string') {\n        $bool: string.to-lower-case($bool);\n\n        @if not($bool == 'true' or $bool == 'false') {\n            @error 'The expanded function requires a boolean value.';\n        }\n    } @else if (type-of($bool) != 'bool') {\n        @error 'The expanded function requires a boolean value.';\n    }\n    \n    @return '[aria-expanded=' + $bool + ']';\n",
       "line": {
-        "start": 270,
-        "end": 282
+        "start": 276,
+        "end": 288
       }
     },
     "group": [
@@ -512,18 +512,64 @@
     }
   },
   {
+    "description": "Creates an aria-hidden selector\n",
+    "commentRange": {
+      "start": 290,
+      "end": 297
+    },
+    "context": {
+      "type": "function",
+      "name": "hidden",
+      "code": "\n    @if (type-of($bool) == 'string') {\n        $bool: string.to-lower-case($bool);\n\n        @if not($bool == 'true' or $bool == 'false') {\n            @error 'The hidden function requires a boolean value. Received: ' + $bool;\n        }\n    } @else if (type-of($bool) != 'bool') {\n        @error 'The hidden function requires a boolean value. Received: ' + $bool;\n    }\n    \n    @return '[aria-hidden=' + $bool + ']';\n",
+      "line": {
+        "start": 298,
+        "end": 310
+      }
+    },
+    "group": [
+      "functions"
+    ],
+    "example": [
+      {
+        "type": "scss",
+        "code": "hidden(true) // -> [aria-hidden=true]",
+        "description": "hidden function"
+      }
+    ],
+    "parameter": [
+      {
+        "type": "Bool",
+        "name": "bool",
+        "description": "the value of the selector"
+      }
+    ],
+    "return": {
+      "type": "String",
+      "description": "an aria-hidden selector"
+    },
+    "access": "public",
+    "require": [],
+    "throw": [
+      "The hidden function requires a boolean value. Received: "
+    ],
+    "file": {
+      "path": "util.scss",
+      "name": "util.scss"
+    }
+  },
+  {
     "description": "Converts a number to ms\n",
     "commentRange": {
-      "start": 284,
-      "end": 291
+      "start": 312,
+      "end": 319
     },
     "context": {
       "type": "function",
       "name": "ms",
       "code": "\n    @if (type-of($val) != 'number') {\n        @error 'The ms function requires a number value.';\n    }\n\n    @return $val * 1ms;\n",
       "line": {
-        "start": 292,
-        "end": 298
+        "start": 320,
+        "end": 326
       }
     },
     "group": [
@@ -564,8 +610,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 340,
-            "end": 346
+            "start": 368,
+            "end": 374
           }
         }
       }
@@ -574,16 +620,16 @@
   {
     "description": "Converts a number to px\n",
     "commentRange": {
-      "start": 300,
-      "end": 307
+      "start": 328,
+      "end": 335
     },
     "context": {
       "type": "function",
       "name": "px",
       "code": "\n    @if (type-of($val) != 'number') {\n        @error 'The px function requires a number value.';\n    }\n\n    @return $val * 1px;\n",
       "line": {
-        "start": 308,
-        "end": 314
+        "start": 336,
+        "end": 342
       }
     },
     "group": [
@@ -624,8 +670,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 356,
-            "end": 362
+            "start": 384,
+            "end": 390
           }
         }
       }
@@ -634,16 +680,16 @@
   {
     "description": "Removes the unit from the given value\n",
     "commentRange": {
-      "start": 316,
-      "end": 323
+      "start": 344,
+      "end": 351
     },
     "context": {
       "type": "function",
       "name": "strip-unit",
       "code": "\n    @if (type-of($val) != 'number') {\n        @error 'The strip-unit function requires a number value.';\n    }\n\n    @return math.div($val, $val * 0 + 1);\n",
       "line": {
-        "start": 324,
-        "end": 330
+        "start": 352,
+        "end": 358
       }
     },
     "group": [
@@ -684,8 +730,8 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 503,
-            "end": 528
+            "start": 531,
+            "end": 556
           }
         }
       },
@@ -696,8 +742,8 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 503,
-            "end": 528
+            "start": 531,
+            "end": 556
           }
         }
       }
@@ -706,16 +752,16 @@
   {
     "description": "Returns the requested delay value as ms\n",
     "commentRange": {
-      "start": 332,
-      "end": 339
+      "start": 360,
+      "end": 367
     },
     "context": {
       "type": "function",
       "name": "delay",
       "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
       "line": {
-        "start": 340,
-        "end": 346
+        "start": 368,
+        "end": 374
       }
     },
     "group": [
@@ -769,16 +815,16 @@
   {
     "description": "Returns the requested breakpoint value as px\n",
     "commentRange": {
-      "start": 348,
-      "end": 355
+      "start": 376,
+      "end": 383
     },
     "context": {
       "type": "function",
       "name": "break",
       "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
       "line": {
-        "start": 356,
-        "end": 362
+        "start": 384,
+        "end": 390
       }
     },
     "group": [
@@ -836,8 +882,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       },
@@ -848,8 +894,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       },
@@ -860,8 +906,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       }
@@ -870,8 +916,8 @@
   {
     "description": "Delay variables\n",
     "commentRange": {
-      "start": 94,
-      "end": 101
+      "start": 100,
+      "end": 107
     },
     "context": {
       "type": "variable",
@@ -879,8 +925,8 @@
       "value": "(\n    instant: $delay-base + $delay-step * 0,\n    fast: $delay-base + $delay-step * 1,\n    med-fast: $delay-base + $delay-step * 2,\n    default: $delay-base + $delay-step * 3,\n    med-slow: $delay-base + $delay-step * 4,\n    slow: $delay-base + $delay-step * 5\n)",
       "scope": "default",
       "line": {
-        "start": 102,
-        "end": 109
+        "start": 108,
+        "end": 115
       }
     },
     "group": [
@@ -937,8 +983,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 340,
-            "end": 346
+            "start": 368,
+            "end": 374
           }
         }
       },
@@ -949,8 +995,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 340,
-            "end": 346
+            "start": 368,
+            "end": 374
           }
         }
       },
@@ -961,8 +1007,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 340,
-            "end": 346
+            "start": 368,
+            "end": 374
           }
         }
       }
@@ -971,8 +1017,8 @@
   {
     "description": "Breakpoint variables\n",
     "commentRange": {
-      "start": 111,
-      "end": 117
+      "start": 117,
+      "end": 123
     },
     "context": {
       "type": "variable",
@@ -980,8 +1026,8 @@
       "value": "(\n    xs: 480,\n    sm: 768,\n    md: 1024,\n    lg: 1200,\n    xl: 1440\n)",
       "scope": "default",
       "line": {
-        "start": 118,
-        "end": 124
+        "start": 124,
+        "end": 130
       }
     },
     "group": [
@@ -1032,8 +1078,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 356,
-            "end": 362
+            "start": 384,
+            "end": 390
           }
         }
       },
@@ -1044,8 +1090,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 356,
-            "end": 362
+            "start": 384,
+            "end": 390
           }
         }
       },
@@ -1056,8 +1102,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 356,
-            "end": 362
+            "start": 384,
+            "end": 390
           }
         }
       },
@@ -1068,8 +1114,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       },
@@ -1080,8 +1126,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       },
@@ -1092,8 +1138,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       },
@@ -1104,8 +1150,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 401,
-            "end": 415
+            "start": 429,
+            "end": 443
           }
         }
       },
@@ -1116,8 +1162,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 455,
-            "end": 481
+            "start": 483,
+            "end": 509
           }
         }
       }
@@ -1126,16 +1172,16 @@
   {
     "description": "Creates a prefixed CSS var definition\n",
     "commentRange": {
-      "start": 364,
-      "end": 372
+      "start": 392,
+      "end": 400
     },
     "context": {
       "type": "mixin",
       "name": "css-var",
       "code": "\n    #{css-prefix($key)}: #{$val};\n",
       "line": {
-        "start": 373,
-        "end": 375
+        "start": 401,
+        "end": 403
       }
     },
     "group": [
@@ -1180,8 +1226,8 @@
           "name": "css-var-ref",
           "code": "\n    @include css-var($key1, css-var($key2));\n",
           "line": {
-            "start": 386,
-            "end": 388
+            "start": 414,
+            "end": 416
           }
         }
       }
@@ -1190,16 +1236,16 @@
   {
     "description": "Creates a prefixed CSS var reference\n",
     "commentRange": {
-      "start": 377,
-      "end": 385
+      "start": 405,
+      "end": 413
     },
     "context": {
       "type": "mixin",
       "name": "css-var-ref",
       "code": "\n    @include css-var($key1, css-var($key2));\n",
       "line": {
-        "start": 386,
-        "end": 388
+        "start": 414,
+        "end": 416
       }
     },
     "group": [
@@ -1244,16 +1290,16 @@
   {
     "description": "Wraps the provided content in a media query\n",
     "commentRange": {
-      "start": 390,
-      "end": 400
+      "start": 418,
+      "end": 428
     },
     "context": {
       "type": "mixin",
       "name": "break",
       "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
       "line": {
-        "start": 401,
-        "end": 415
+        "start": 429,
+        "end": 443
       }
     },
     "group": [
@@ -1326,8 +1372,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 455,
-            "end": 481
+            "start": 483,
+            "end": 509
           }
         }
       },
@@ -1338,8 +1384,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 455,
-            "end": 481
+            "start": 483,
+            "end": 509
           }
         }
       }
@@ -1348,16 +1394,16 @@
   {
     "description": "Creates utility selectors for a given property at each breakpoint\n",
     "commentRange": {
-      "start": 417,
-      "end": 454
+      "start": 445,
+      "end": 482
     },
     "context": {
       "type": "mixin",
       "name": "break-util",
       "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
       "line": {
-        "start": 455,
-        "end": 481
+        "start": 483,
+        "end": 509
       }
     },
     "group": [
@@ -1414,16 +1460,16 @@
   {
     "description": "Generates a property with a fluid value between specified screen sizes\n",
     "commentRange": {
-      "start": 483,
-      "end": 502
+      "start": 511,
+      "end": 530
     },
     "context": {
       "type": "mixin",
       "name": "fluid",
       "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
       "line": {
-        "start": 503,
-        "end": 528
+        "start": 531,
+        "end": 556
       }
     },
     "group": [
@@ -1493,11 +1539,11 @@
     },
     "context": {
       "type": "css",
-      "name": "/// Imports\n@use 'sass:string';\n\n/// Library name\n/// @group Variables\n/// @type String\n$lib: sun !default;\n\n/// Dash - variable name separator\n/// @group Variables\n/// @type String\n$dash: #{'-'};\n\n/// Prefix added to selectors\n/// @group Variables\n/// @type String\n$pre: #{$lib}#{$dash};\n\n/// Dot - added to classes\n/// @group Variables\n/// @type String\n$dot: #{'.'};\n\n/// Hash - added to ids\n/// @group Variables\n/// @type String\n$hash: #{'#'};\n\n/// CSS-selector for disabled elements\n/// @group Variables\n/// @type String\n$disabled: #{'[disabled]'};\n\n/// CSS-selector for elements with an aria-controls attribute\n/// @group Variables\n/// @type String\n$has-controls: #{'[aria-controls]'};\n\n/// CSS-selector for elements with an aria-expanded attribute\n/// @group Variables\n/// @type String\n$has-expanded: #{'[aria-expanded]'};\n\n/// CSS-selector for elements with an href attribute\n/// @group Variables\n/// @type String\n$has-link: #{'[href]'};\n\n/// CSS-selector for elements with a routerLink attribute\n/// @group Variables\n/// @type String\n$has-router-link: #{'[routerLink]'};\n\n/// CSS-selector for elements with an id attribute\n/// @group Variables\n/// @type String\n$has-id: #{'[id]'};\n\n/// CSS-selector for elements that aren't tabbable (i.e. tabindex is negative)\n/// @group Variables\n/// @type String\n$not-tabbable: #{'[tabindex^=\"-\"]'};\n\n/// CSS-selector for elements that are tabbable (i.e. tabindex isn't negative)\n/// @group Variables\n/// @type String\n$tabbable: #{'[tabindex]'}#{neg($not-tabbable)};\n\n/// CSS-selector for submenu buttons\n/// @group Variables\n/// @type String\n$sub-menu-buttons: #{'button'}#{$has-controls};\n\n/// CSS-selector for submenus\n/// @group Variables\n/// @type String\n$sub-menu: #{$sub-menu-buttons}#{' + ul'}#{$has-id};\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-base: 0 !default;\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-step: 100 !default;\n\n/// Delay variables\n/// @group Maps\n/// @prop",
+      "name": "/// Imports\n@use 'sass:math';\n@use 'sass:string';\n\n/// Library name\n/// @group Variables\n/// @type String\n$lib: sun !default;\n\n/// Dash - variable name separator\n/// @group Variables\n/// @type String\n$dash: #{'-'};\n\n/// Prefix added to selectors\n/// @group Variables\n/// @type String\n$pre: #{$lib}#{$dash};\n\n/// Dot - added to classes\n/// @group Variables\n/// @type String\n$dot: #{'.'};\n\n/// Hash - added to ids\n/// @group Variables\n/// @type String\n$hash: #{'#'};\n\n/// CSS-selector for disabled elements\n/// @group Variables\n/// @type String\n$disabled: #{'[disabled]'};\n\n/// CSS-selector for elements with an aria-controls attribute\n/// @group Variables\n/// @type String\n$has-controls: #{'[aria-controls]'};\n\n/// CSS-selector for elements with an aria-expanded attribute\n/// @group Variables\n/// @type String\n$has-expanded: #{'[aria-expanded]'};\n\n/// CSS-selector for elements with an aria-hidden attribute\n/// @group Variables\n/// @type String\n$has-hidden: #{'[aria-hidden]'};\n\n/// CSS-selector for elements with an href attribute\n/// @group Variables\n/// @type String\n$has-link: #{'[href]'};\n\n/// CSS-selector for elements with a routerLink attribute\n/// @group Variables\n/// @type String\n$has-router-link: #{'[routerLink]'};\n\n/// CSS-selector for elements with an id attribute\n/// @group Variables\n/// @type String\n$has-id: #{'[id]'};\n\n/// CSS-selector for elements that aren't tabbable (i.e. tabindex is negative)\n/// @group Variables\n/// @type String\n$not-tabbable: #{'[tabindex^=\"-\"]'};\n\n/// CSS-selector for elements that are tabbable (i.e. tabindex isn't negative)\n/// @group Variables\n/// @type String\n$tabbable: #{'[tabindex]'}#{neg($not-tabbable)};\n\n/// CSS-selector for submenu buttons\n/// @group Variables\n/// @type String\n$sub-menu-buttons: #{'button'}#{$has-controls};\n\n/// CSS-selector for submenus\n/// @group Variables\n/// @type String\n$sub-menu: #{$sub-menu-buttons}#{' + ul'}#{$has-id};\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-base: 0 !default;\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-step: 100 !default;\n\n/// Delay variables\n/// @group Maps\n/// @prop",
       "value": "Number",
       "line": {
-        "start": 96,
-        "end": 528
+        "start": 102,
+        "end": 556
       }
     },
     "author": [
@@ -1515,8 +1561,8 @@
   {
     "description": "Library name\n",
     "commentRange": {
-      "start": 9,
-      "end": 11
+      "start": 10,
+      "end": 12
     },
     "context": {
       "type": "variable",
@@ -1524,8 +1570,8 @@
       "value": "sun",
       "scope": "default",
       "line": {
-        "start": 12,
-        "end": 12
+        "start": 13,
+        "end": 13
       }
     },
     "group": [
@@ -1541,8 +1587,8 @@
   {
     "description": "Dash - variable name separator\n",
     "commentRange": {
-      "start": 14,
-      "end": 16
+      "start": 15,
+      "end": 17
     },
     "context": {
       "type": "variable",
@@ -1550,8 +1596,8 @@
       "value": "#{'-'}",
       "scope": "private",
       "line": {
-        "start": 17,
-        "end": 17
+        "start": 18,
+        "end": 18
       }
     },
     "group": [
@@ -1571,8 +1617,8 @@
           "name": "css-prefix",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-prefix function requires a string value.';\n    }\n\n    @while (string.index($base, $dash) == 1) {\n        $base: string.slice($base, 2);\n    }\n\n    @return $dash + $dash + prefix($base);\n",
           "line": {
-            "start": 170,
-            "end": 180
+            "start": 176,
+            "end": 186
           }
         }
       },
@@ -1583,8 +1629,8 @@
           "name": "css-prefix",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-prefix function requires a string value.';\n    }\n\n    @while (string.index($base, $dash) == 1) {\n        $base: string.slice($base, 2);\n    }\n\n    @return $dash + $dash + prefix($base);\n",
           "line": {
-            "start": 170,
-            "end": 180
+            "start": 176,
+            "end": 186
           }
         }
       },
@@ -1595,8 +1641,8 @@
           "name": "css-prefix",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The css-prefix function requires a string value.';\n    }\n\n    @while (string.index($base, $dash) == 1) {\n        $base: string.slice($base, 2);\n    }\n\n    @return $dash + $dash + prefix($base);\n",
           "line": {
-            "start": 170,
-            "end": 180
+            "start": 176,
+            "end": 186
           }
         }
       }
@@ -1605,8 +1651,8 @@
   {
     "description": "Prefix added to selectors\n",
     "commentRange": {
-      "start": 19,
-      "end": 21
+      "start": 20,
+      "end": 22
     },
     "context": {
       "type": "variable",
@@ -1614,8 +1660,8 @@
       "value": "#{$lib}#{$dash}",
       "scope": "private",
       "line": {
-        "start": 22,
-        "end": 22
+        "start": 23,
+        "end": 23
       }
     },
     "group": [
@@ -1635,8 +1681,8 @@
           "name": "prefix",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The prefix function requires a string value.';\n    }\n\n    $base: string.to-lower-case($base);\n\n    @if (string.index($base, $pre) != 1) {\n        $base: $pre + $base;\n    }\n\n    @return $base;\n",
           "line": {
-            "start": 148,
-            "end": 160
+            "start": 154,
+            "end": 166
           }
         }
       },
@@ -1647,8 +1693,8 @@
           "name": "prefix",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The prefix function requires a string value.';\n    }\n\n    $base: string.to-lower-case($base);\n\n    @if (string.index($base, $pre) != 1) {\n        $base: $pre + $base;\n    }\n\n    @return $base;\n",
           "line": {
-            "start": 148,
-            "end": 160
+            "start": 154,
+            "end": 166
           }
         }
       }
@@ -1657,8 +1703,8 @@
   {
     "description": "Dot - added to classes\n",
     "commentRange": {
-      "start": 24,
-      "end": 26
+      "start": 25,
+      "end": 27
     },
     "context": {
       "type": "variable",
@@ -1666,8 +1712,8 @@
       "value": "#{'.'}",
       "scope": "private",
       "line": {
-        "start": 27,
-        "end": 27
+        "start": 28,
+        "end": 28
       }
     },
     "group": [
@@ -1687,8 +1733,8 @@
           "name": "class",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The class function requires a string value.';\n    }\n\n    @return $dot + prefix($base);\n",
           "line": {
-            "start": 222,
-            "end": 228
+            "start": 228,
+            "end": 234
           }
         }
       }
@@ -1697,8 +1743,8 @@
   {
     "description": "Hash - added to ids\n",
     "commentRange": {
-      "start": 29,
-      "end": 31
+      "start": 30,
+      "end": 32
     },
     "context": {
       "type": "variable",
@@ -1706,8 +1752,8 @@
       "value": "#{'#'}",
       "scope": "private",
       "line": {
-        "start": 32,
-        "end": 32
+        "start": 33,
+        "end": 33
       }
     },
     "group": [
@@ -1727,8 +1773,8 @@
           "name": "id",
           "code": "\n    @if (type-of($base) != 'string') {\n        @error 'The id function requires a string value.';\n    }\n\n    @return $hash + prefix($base);\n",
           "line": {
-            "start": 238,
-            "end": 244
+            "start": 244,
+            "end": 250
           }
         }
       }
@@ -1737,8 +1783,8 @@
   {
     "description": "CSS-selector for disabled elements\n",
     "commentRange": {
-      "start": 34,
-      "end": 36
+      "start": 35,
+      "end": 37
     },
     "context": {
       "type": "variable",
@@ -1746,8 +1792,8 @@
       "value": "#{'[disabled]'}",
       "scope": "private",
       "line": {
-        "start": 37,
-        "end": 37
+        "start": 38,
+        "end": 38
       }
     },
     "group": [
@@ -1763,8 +1809,8 @@
   {
     "description": "CSS-selector for elements with an aria-controls attribute\n",
     "commentRange": {
-      "start": 39,
-      "end": 41
+      "start": 40,
+      "end": 42
     },
     "context": {
       "type": "variable",
@@ -1772,8 +1818,8 @@
       "value": "#{'[aria-controls]'}",
       "scope": "private",
       "line": {
-        "start": 42,
-        "end": 42
+        "start": 43,
+        "end": 43
       }
     },
     "group": [
@@ -1789,8 +1835,8 @@
   {
     "description": "CSS-selector for elements with an aria-expanded attribute\n",
     "commentRange": {
-      "start": 44,
-      "end": 46
+      "start": 45,
+      "end": 47
     },
     "context": {
       "type": "variable",
@@ -1798,8 +1844,34 @@
       "value": "#{'[aria-expanded]'}",
       "scope": "private",
       "line": {
-        "start": 47,
-        "end": 47
+        "start": 48,
+        "end": 48
+      }
+    },
+    "group": [
+      "variables"
+    ],
+    "type": "String",
+    "access": "public",
+    "file": {
+      "path": "util.scss",
+      "name": "util.scss"
+    }
+  },
+  {
+    "description": "CSS-selector for elements with an aria-hidden attribute\n",
+    "commentRange": {
+      "start": 50,
+      "end": 52
+    },
+    "context": {
+      "type": "variable",
+      "name": "has-hidden",
+      "value": "#{'[aria-hidden]'}",
+      "scope": "private",
+      "line": {
+        "start": 53,
+        "end": 53
       }
     },
     "group": [
@@ -1815,8 +1887,8 @@
   {
     "description": "CSS-selector for elements with an href attribute\n",
     "commentRange": {
-      "start": 49,
-      "end": 51
+      "start": 55,
+      "end": 57
     },
     "context": {
       "type": "variable",
@@ -1824,8 +1896,8 @@
       "value": "#{'[href]'}",
       "scope": "private",
       "line": {
-        "start": 52,
-        "end": 52
+        "start": 58,
+        "end": 58
       }
     },
     "group": [
@@ -1841,8 +1913,8 @@
   {
     "description": "CSS-selector for elements with a routerLink attribute\n",
     "commentRange": {
-      "start": 54,
-      "end": 56
+      "start": 60,
+      "end": 62
     },
     "context": {
       "type": "variable",
@@ -1850,8 +1922,8 @@
       "value": "#{'[routerLink]'}",
       "scope": "private",
       "line": {
-        "start": 57,
-        "end": 57
+        "start": 63,
+        "end": 63
       }
     },
     "group": [
@@ -1867,8 +1939,8 @@
   {
     "description": "CSS-selector for elements with an id attribute\n",
     "commentRange": {
-      "start": 59,
-      "end": 61
+      "start": 65,
+      "end": 67
     },
     "context": {
       "type": "variable",
@@ -1876,8 +1948,8 @@
       "value": "#{'[id]'}",
       "scope": "private",
       "line": {
-        "start": 62,
-        "end": 62
+        "start": 68,
+        "end": 68
       }
     },
     "group": [
@@ -1893,8 +1965,8 @@
   {
     "description": "CSS-selector for elements that aren't tabbable (i.e. tabindex is negative)\n",
     "commentRange": {
-      "start": 64,
-      "end": 66
+      "start": 70,
+      "end": 72
     },
     "context": {
       "type": "variable",
@@ -1902,8 +1974,8 @@
       "value": "#{'[tabindex^=\"-\"]'}",
       "scope": "private",
       "line": {
-        "start": 67,
-        "end": 67
+        "start": 73,
+        "end": 73
       }
     },
     "group": [
@@ -1919,8 +1991,8 @@
   {
     "description": "CSS-selector for elements that are tabbable (i.e. tabindex isn't negative)\n",
     "commentRange": {
-      "start": 69,
-      "end": 71
+      "start": 75,
+      "end": 77
     },
     "context": {
       "type": "variable",
@@ -1928,8 +2000,8 @@
       "value": "#{'[tabindex]'}#{neg($not-tabbable)}",
       "scope": "private",
       "line": {
-        "start": 72,
-        "end": 72
+        "start": 78,
+        "end": 78
       }
     },
     "group": [
@@ -1945,8 +2017,8 @@
   {
     "description": "CSS-selector for submenu buttons\n",
     "commentRange": {
-      "start": 74,
-      "end": 76
+      "start": 80,
+      "end": 82
     },
     "context": {
       "type": "variable",
@@ -1954,8 +2026,8 @@
       "value": "#{'button'}#{$has-controls}",
       "scope": "private",
       "line": {
-        "start": 77,
-        "end": 77
+        "start": 83,
+        "end": 83
       }
     },
     "group": [
@@ -1971,8 +2043,8 @@
   {
     "description": "CSS-selector for submenus\n",
     "commentRange": {
-      "start": 79,
-      "end": 81
+      "start": 85,
+      "end": 87
     },
     "context": {
       "type": "variable",
@@ -1980,8 +2052,8 @@
       "value": "#{$sub-menu-buttons}#{' + ul'}#{$has-id}",
       "scope": "private",
       "line": {
-        "start": 82,
-        "end": 82
+        "start": 88,
+        "end": 88
       }
     },
     "group": [
@@ -1997,8 +2069,8 @@
   {
     "description": "Value added to all delay variables\n",
     "commentRange": {
-      "start": 84,
-      "end": 86
+      "start": 90,
+      "end": 92
     },
     "context": {
       "type": "variable",
@@ -2006,8 +2078,8 @@
       "value": "0",
       "scope": "default",
       "line": {
-        "start": 87,
-        "end": 87
+        "start": 93,
+        "end": 93
       }
     },
     "group": [
@@ -2023,8 +2095,8 @@
   {
     "description": "Value added to all delay variables\n",
     "commentRange": {
-      "start": 89,
-      "end": 91
+      "start": 95,
+      "end": 97
     },
     "context": {
       "type": "variable",
@@ -2032,8 +2104,8 @@
       "value": "100",
       "scope": "default",
       "line": {
-        "start": 92,
-        "end": 92
+        "start": 98,
+        "end": 98
       }
     },
     "group": [
@@ -2049,8 +2121,8 @@
   {
     "description": "True if Bootstrap5 is used in the project\n",
     "commentRange": {
-      "start": 126,
-      "end": 128
+      "start": 132,
+      "end": 134
     },
     "context": {
       "type": "variable",
@@ -2058,8 +2130,8 @@
       "value": "false",
       "scope": "default",
       "line": {
-        "start": 129,
-        "end": 129
+        "start": 135,
+        "end": 135
       }
     },
     "group": [

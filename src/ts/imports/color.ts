@@ -2,37 +2,34 @@
  * Color
  */
 export class sunColor {
+    protected static hexBase: number = 16;
+    protected static hexMax: string = 'FF';
     public r: number;
     public g: number;
     public b: number;
     public a: number;
 
-    constructor (
-        r?: number,
-        g?: number,
-        b?: number,
-        a?: number,
-        str?: string) {
-        this.r = r ?? 0;
-        this.g = g ?? 0;
-        this.b = b ?? 0;
-        this.a = a ?? 1;
-        this.stringConstructor(str);
+    constructor (args: {[key: string]: number | string}) {
+        this.r = typeof args.r === 'number' ? Math.max(Math.min(args.r, sunColor.hexBase ** 2 - 1), 0) : 0;
+        this.g = typeof args.g === 'number' ? Math.max(Math.min(args.g, sunColor.hexBase ** 2 - 1), 0) : 0;
+        this.b = typeof args.b === 'number' ? Math.max(Math.min(args.b, sunColor.hexBase ** 2 - 1), 0) : 0;
+        this.a = typeof args.a === 'number' ? Math.max(Math.min(args.a, 1), 0) : 1;
+        if (typeof args.color === 'string') {
+            this.stringConstructor(args.color);
+        }
     }
 
     /**
      * Constructor from a string argument
      */
-    protected stringConstructor (str?: string) : void {
-        if (str) {
-            if (str.startsWith('#')) {
-                this.hexConstructor(str);
-            } else {
-                if (~str.indexOf('linear-gradient')) {
-                    str = str.substring(str.indexOf('linear-gradient'), str.length);
-                }
-                this.rgbConstructor(str);
+    protected stringConstructor (str: string) : void {
+        if (str.startsWith('#')) {
+            this.hexConstructor(str);
+        } else {
+            if (~str.indexOf('linear-gradient')) {
+                str = str.substring(str.indexOf('linear-gradient'), str.length);
             }
+            this.rgbConstructor(str);
         }
     }
 
@@ -46,16 +43,16 @@ export class sunColor {
             case 6:
                 return;
             case 2:
-                hex = '#' + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + 'FF';
+                hex = '#' + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + sunColor.hexMax;
                 break;
             case 3:
-                hex = '#' + hex[1] + hex[1] + hex[1] + hex[2] + hex[2] + hex[2] + 'FF';
+                hex = '#' + hex[1] + hex[1] + hex[1] + hex[2] + hex[2] + hex[2] + sunColor.hexMax;
                 break;
             case 4:
-                hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3] + 'FF';
+                hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3] + sunColor.hexMax;
                 break;
             case 7:
-                hex += 'FF';
+                hex += sunColor.hexMax;
                 break;
             case 8:
                 hex += hex[hex.length - 1];
@@ -64,11 +61,10 @@ export class sunColor {
                 hex = hex.substring(0, 9);
         }
 
-        let base: number = 16;
-        this.r = parseInt(hex.substring(1, 3), base);
-        this.g = parseInt(hex.substring(3, 5), base);
-        this.b = parseInt(hex.substring(5, 7), base);
-        this.a = parseInt(hex.substring(7, 9), base) / base ** 2;
+        this.r = parseInt(hex.substring(1, 3), sunColor.hexBase);
+        this.g = parseInt(hex.substring(3, 5), sunColor.hexBase);
+        this.b = parseInt(hex.substring(5, 7), sunColor.hexBase);
+        this.a = parseInt(hex.substring(7, 9), sunColor.hexBase) / sunColor.hexBase ** 2;
     }
 
     /**

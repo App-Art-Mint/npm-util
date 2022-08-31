@@ -4,6 +4,7 @@
 /// @group Util
 
 /// Imports
+@use 'sass:math';
 @use 'sass:string';
 
 /// Library name
@@ -45,6 +46,11 @@ $has-controls: #{'[aria-controls]'};
 /// @group Variables
 /// @type String
 $has-expanded: #{'[aria-expanded]'};
+
+/// CSS-selector for elements with an aria-hidden attribute
+/// @group Variables
+/// @type String
+$has-hidden: #{'[aria-hidden]'};
 
 /// CSS-selector for elements with an href attribute
 /// @group Variables
@@ -279,6 +285,28 @@ $bootstrap5: false !default;
     }
     
     @return '[aria-expanded=' + $bool + ']';
+}
+
+/// Creates an aria-hidden selector
+/// @group Functions
+/// 
+/// @example scss - hidden function
+///     hidden(true) // -> [aria-hidden=true]
+///  
+/// @param {Bool} $bool - the value of the selector
+/// @return {String} - an aria-hidden selector
+@function hidden ($bool) {
+    @if (type-of($bool) == 'string') {
+        $bool: string.to-lower-case($bool);
+
+        @if not($bool == 'true' or $bool == 'false') {
+            @error 'The hidden function requires a boolean value. Received: ' + $bool;
+        }
+    } @else if (type-of($bool) != 'bool') {
+        @error 'The hidden function requires a boolean value. Received: ' + $bool;
+    }
+    
+    @return '[aria-hidden=' + $bool + ']';
 }
 
 /// Converts a number to ms

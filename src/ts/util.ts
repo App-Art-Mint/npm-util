@@ -73,19 +73,21 @@ export abstract class sunUtil {
     static show (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
         if (el) {
             el.style.display = '';
-            if (from === sunSide.Top || from === sunSide.Bottom) {
-                el.style.height = `${el.scrollHeight}px`;
-            } else {
-                el.style.width = `${el.scrollWidth}px`;
-            }
-            
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 if (from === sunSide.Top || from === sunSide.Bottom) {
-                    el.style.height = 'auto';
+                    el.style.height = `${el.scrollHeight}px`;
                 } else {
-                    el.style.width = 'auto';
+                    el.style.width = `${el.scrollWidth}px`;
                 }
-            }, delay);
+                
+                setTimeout(() => {
+                    if (from === sunSide.Top || from === sunSide.Bottom) {
+                        el.style.height = 'auto';
+                    } else {
+                        el.style.width = 'auto';
+                    }
+                }, delay);
+            });
         }
     }
 
@@ -99,7 +101,7 @@ export abstract class sunUtil {
                 width = el.scrollWidth,
                 transition = el.style.transition;
             el.style.transition = '';
-            requestAnimationFrame(function () {
+            requestAnimationFrame(() => {
                 if (from === sunSide.Top || from === sunSide.Bottom) {
                     el.style.height = `${height}px`;
                 } else {
@@ -107,7 +109,7 @@ export abstract class sunUtil {
                 }
                 
                 el.style.transition = transition;
-                requestAnimationFrame(function () {
+                requestAnimationFrame(() => {
                     if (from === sunSide.Top || from === sunSide.Bottom) {
                         el.style.height = '0';
                     } else {
