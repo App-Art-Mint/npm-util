@@ -20,6 +20,21 @@ export abstract class sunUtil {
     }
 
     /**
+     * Ensures that a function `func` is run only after not being called for `wait` milliseconds
+     * @param func - the function to debounce
+     * @param wait - the amount of time to wait before running the function
+     */
+    static debounce (func: Function, wait: number = sunSettings.delay.default) : Function {
+        let timer: number;
+        return function (e: any) {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(func, wait, e);
+        }
+    }
+
+    /**
      * Ensures that a function `func` is called at most every `wait` milliseconds with optional leading and trailing calls
      * @param func - the function to throttle
      * @param wait - the amount of time between function calls
@@ -64,6 +79,19 @@ export abstract class sunUtil {
             };
 
         return throttled;
+    }
+
+    /**
+     * Ensures that a function `func` is called at most every `wait` milliseconds with optional leading and trailing calls
+     * @param func - the function to throttle
+     * @param wait - the amount of time between function calls
+     * @param options - leading and trailing options: default = \{ leading: true, trailing, true \}
+     * @returns - the throttled function as an EventListener
+     */
+    static throttleEvent (func: Function,
+                          wait: number = sunSettings.delay.default,
+                          options?: {[key: string]: boolean}) : EventListener {
+        return sunUtil.throttle(func, wait, options) as EventListener;
     }
 
     /**
@@ -121,6 +149,37 @@ export abstract class sunUtil {
                 el.style.display = 'none';
             }, delay);
         }
+    }
+
+    /**
+     * Copies the provided text to the clipboard
+     * @param this - the element that activates the event
+     */
+    static eCopyText (this: HTMLElement) : boolean {
+        let text: string | null = this.getAttribute('sun-copy'),
+            textArea: HTMLTextAreaElement = document.createElement('textarea');
+
+        if (!text || !textArea) {
+            return false;
+        }
+
+        textArea.value = text;
+        textArea.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-100%, -100%);
+            opacity: 0;
+            z-index: -1;
+        `;
+
+        document.body.appendChild(textArea);
+        textArea.select();
+        textArea.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(textArea.value);
+        document.body.removeChild(textArea);
+
+        return true;
     }
 }
 export default sunUtil;
