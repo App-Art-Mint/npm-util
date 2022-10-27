@@ -153,11 +153,10 @@ export abstract class sunUtil {
 
     /**
      * Copies the provided text to the clipboard
-     * @param this - the element that activates the event
+     * @param text - the text to copy
      */
-    static eCopyText (this: HTMLElement) : boolean {
-        let text: string | null = this.getAttribute('sun-copy'),
-            textArea: HTMLTextAreaElement = document.createElement('textarea');
+    static CopyText (text: string) : boolean {
+        let textArea: HTMLTextAreaElement = document.createElement('textarea');
 
         if (!text || !textArea) {
             return false;
