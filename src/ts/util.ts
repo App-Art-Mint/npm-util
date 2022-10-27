@@ -23,8 +23,9 @@ export abstract class sunUtil {
      * Ensures that a function `func` is run only after not being called for `wait` milliseconds
      * @param func - the function to debounce
      * @param wait - the amount of time to wait before running the function
+     * @returns - the debounced function
      */
-    static debounce (func: Function, wait: number = sunSettings.delay.default) : Function {
+     static debounce (func: Function, wait: number = sunSettings.delay.default) : Function {
         let timer: number;
         return function (e: any) {
             if (timer) {
@@ -32,6 +33,16 @@ export abstract class sunUtil {
             }
             timer = setTimeout(func, wait, e);
         }
+    }
+
+    /**
+     * Ensures that a function `func` is run only after not being called for `wait` milliseconds
+     * @param func - the function to debounce
+     * @param wait - the amount of time to wait before running the function
+     * @returns - the debounced function as an EventListener
+     */
+     static debounceEvent (func: Function, wait: number = sunSettings.delay.default) : EventListener {
+        return sunUtil.debounce(func, wait) as EventListener;
     }
 
     /**
@@ -97,6 +108,8 @@ export abstract class sunUtil {
     /**
      * Sets the element's height to its `innerHeight`, then to `auto` after a delay
      * @param el - the element whose height will be set
+     * @param delay - the amount of time in milliseconds that the show animation will be active
+     * @param from - the side that the element is animating from
      */
     static show (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
         if (el) {
@@ -122,6 +135,8 @@ export abstract class sunUtil {
     /**
      * Sets the element's height to 0
      * @param el - the element whose height will be set
+     * @param delay - the amount of time in milliseconds that the show animation will be active
+     * @param from - the side that the element is animating from
      */
     static hide (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
         if (el) {
@@ -154,6 +169,7 @@ export abstract class sunUtil {
     /**
      * Copies the provided text to the clipboard
      * @param text - the text to copy
+     * @returns - true if the text was successfully copied to the clipboard; else false
      */
     static CopyText (text: string) : boolean {
         let textArea: HTMLTextAreaElement = document.createElement('textarea');
