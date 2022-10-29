@@ -165,12 +165,50 @@ export abstract class sunSelectors {
     /**
      * Returns the class of the requested element
      */
-     static getClass (className?: string, classGroup?: string) : string {
+    static getClass (className?: string, classGroup?: string) : string {
         if (classGroup) {
             let group: {[key: string]: string} = this.classes[classGroup] as {[key: string]: string};
             return group[className ?? -1] ?? '';
         }
         return this.classes[className ?? -1] as string ?? '';
+    }
+
+    /**
+     * Returns a NodeList of HTMLElements within the given element that are focusable
+     * @param el - the element whose focusable children will be returned
+     * @returns - the elements within the given element that are focusable
+     */
+    static getFocusables (el?: HTMLElement) : HTMLElement[] {
+        let focusables: HTMLElement[];
+        if (el) {
+            focusables = [...el.querySelectorAll<HTMLElement>(this.focusable)];
+        } else {
+            focusables = [...document.querySelectorAll<HTMLElement>(this.focusable)];
+        }
+
+        focusables.filter((el: HTMLElement) => {
+            return this.isFocusable(el);
+        });
+
+        return focusables;
+    }
+
+    /**
+     * Returns true if an element is focusable and false if not,
+     * based on styles (i.e. a parent has display: none;)
+     * NOTE: Still need to determine what other styles may make an element un-focusable
+     * @param el - the element
+     * @returns - true if the element is focusable; false if not
+     */
+    static isFocusable (el: HTMLElement) : boolean {
+        let current: HTMLElement | null = el;
+        do {
+            if (el.style.display.toLowerCase() === 'none') {
+                return false;
+            }
+            current = el.parentElement;
+        } while (current);
+        return true;
     }
 }
 export default sunSelectors;

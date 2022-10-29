@@ -147,7 +147,7 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - prefix function
-///     prefix(header) // -> n4v-header
+///     prefix(header) // -> sun-header
 ///  
 /// @param {String} $base - the string to be prefixed
 /// @return {String} - a prefixed string
@@ -169,7 +169,7 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - css-prefix function
-///     css-prefix(background) // -> --n4v-background
+///     css-prefix(background) // -> --sun-background
 ///  
 /// @param {String} $base - the string to be prefixed
 /// @return {String} - a prefixed string
@@ -189,7 +189,7 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - css-var function
-///     css-var(background) // -> var(--n4v-background)
+///     css-var(background) // -> var(--sun-background)
 ///  
 /// @param {String} $base - the CSS-var to create a call for
 /// @return {String} - a CSS-var call
@@ -205,7 +205,7 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - neg function
-///     neg(.n4v-open) // -> :not(.n4v-open)
+///     neg(.sun-open) // -> :not(.sun-open)
 ///  
 /// @param {String} $base - the CSS-selector to negate
 /// @return {String} - a negated CSS-selector
@@ -221,7 +221,7 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - class function
-///     class(open) // -> .n4v-open
+///     class(open) // -> .sun-open
 ///  
 /// @param {String} $base - the name of the class
 /// @return {String} - a class selector
@@ -237,7 +237,7 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - id function
-///     id(header) // -> #n4v-header
+///     id(header) // -> #sun-header
 ///  
 /// @param {String} $base - the name of the id
 /// @return {String} - an id selector
@@ -253,16 +253,23 @@ $bootstrap5: false !default;
 /// @group Functions
 /// 
 /// @example scss - controls function
-///     controls(header) // -> [aria-controls=n4v-header]
+///     controls(header) // -> [aria-controls=sun-header]
 ///  
 /// @param {String} $id - the id of the controlled element
+/// @param {String} $op - the comparison operator
 /// @return {String} - an aria-controls selector
-@function controls ($id) {
+@function controls ($id, $op: '=') {
     @if (type-of($id) != 'string') {
-        @error 'The controls function requires a string value.';
+        @error 'The controls function requires a string value for param 1.';
+    }
+    @if (type-of($op) != 'string') {
+        @error 'The controls function requires a string value for param 2.';
+    }
+    @if not($op == '=' or $op == '~=' or $op == '|=' or $op == '^=' or $op == '$=' or $op == '*=') {
+        @error 'The controls function requires a valid attribute comparison operator for param 2.';
     }
 
-    @return '[aria-controls=' + prefix($id) + ']';
+    @return '[aria-controls' + $op + prefix($id) + ']';
 }
 
 /// Creates an aria-expanded selector
@@ -393,7 +400,7 @@ $bootstrap5: false !default;
 /// @group Mixins
 /// 
 /// @example scss - css-var mixin
-///     @include css-var(bg, black) // -> --n4v-bg: black;
+///     @include css-var(bg, black) // -> --sun-bg: black;
 ///  
 /// @param {String} $key - the key of the CSS var
 /// @param {Any} $val - the value of the CSS var
@@ -406,7 +413,7 @@ $bootstrap5: false !default;
 /// @group Mixins
 /// 
 /// @example scss - css-var-ref mixin
-///     @include css-var-ref(fill, bg) // -> --n4v-fill: var(--n4v-bg);
+///     @include css-var-ref(fill, bg) // -> --sun-fill: var(--sun-bg);
 ///  
 /// @param {String} $key1 - the key of the new CSS var to define
 /// @param {String} $key2 - the key of the referenced CSS var
@@ -426,7 +433,7 @@ $bootstrap5: false !default;
 /// @param {String} $min - the key of the breakpoint to use with min-width
 /// @param {String} $max - the key of the breakpoint to use with max-width
 /// @output the provided content wrapped in a media query
-@mixin break ($min, $max:null) {
+@mixin break ($min, $max: null) {
     @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {
         @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';
     }
