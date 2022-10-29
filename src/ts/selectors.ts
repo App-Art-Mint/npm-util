@@ -207,6 +207,7 @@ export abstract class sunSelectors {
                 return false;
             }
             current = el.parentElement;
+            console.log(current);
         } while (current);
         return true;
     }

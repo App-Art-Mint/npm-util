@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.1.18",
+  "version": "0.1.20",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -34,6 +34,11 @@
   },
   "scripts": {
     "prepare": "npm run build",
+    "precommit": "npm run preversion && npm run version",
+    "postcommit": "npm run postversion",
+    "preversion": "npm i && npm run test",
+    "version": "npm run build && git add -A",
+    "postversion": "git push && git push --tags && npm publish",
     "clean": "rimraf dist docs",
     "build": "npm run build:dev && npm run build:prod && npm run build:index:dev && npm run build:index:prod && npm run build:tsdoc && npm run build:sassdoc",
     "build:dev": "webpack --config webpack.config.dev.ts",
@@ -46,11 +51,7 @@
     "watch:dev": "webpack --watch --config webpack.config.dev.ts",
     "watch:prod": "webpack --watch",
     "watch:tsdoc": "typedoc --watch",
-    "test": "echo 'Run tests here'",
-    "preversion": "npm run test",
-    "version": "npm run build && git add -A",
-    "postversion": "git push && git push --tags && npm publish",
-    "pb": "npm run preversion && npm version patch --force && npm run version && npm run postversion"
+    "test": "echo 'Run tests here'"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
