@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.1.16",
+  "version": "0.1.15",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -47,9 +47,10 @@
     "watch:prod": "webpack --watch",
     "watch:tsdoc": "typedoc --watch",
     "test": "echo 'Run tests here'",
-    "preversion": "npm run test",
-    "version": "npm run build && git add -A",
-    "postversion": "git push && git push --tags && npm publish"
+    "preversion": "echo 'hi'",
+    "version": "echo 'hi'",
+    "postversion": "echo 'hi'",
+    "publishbuild": ""
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
