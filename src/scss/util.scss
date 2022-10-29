@@ -240,13 +240,23 @@ $bootstrap5: false !default;
 ///     id(header) // -> #sun-header
 ///  
 /// @param {String} $base - the name of the id
+/// @param {String} $op - the comparison operator
 /// @return {String} - an id selector
-@function id ($base) {
+@function id ($base, $op: '=') {
     @if (type-of($base) != 'string') {
         @error 'The id function requires a string value.';
     }
+    @if (type-of($op) != 'string') {
+        @error 'The controls function requires a string value for param 2.';
+    }
+    @if not($op == '=' or $op == '~=' or $op == '|=' or $op == '^=' or $op == '$=' or $op == '*=') {
+        @error 'The controls function requires a valid attribute comparison operator for param 2.';
+    }
 
-    @return $hash + prefix($base);
+    @if ($op == '=') {
+        @return $hash + prefix($base);
+    }
+    @return '[id' + $op + prefix($base) + ']';
 }
 
 /// Creates an aria-controls selector with the library prefix
