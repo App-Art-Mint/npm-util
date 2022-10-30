@@ -202,12 +202,12 @@ export abstract class sunSelectors {
      */
     static isFocusable (el: HTMLElement) : boolean {
         let current: HTMLElement | null = el;
+
         do {
-            if (el.style.display.toLowerCase() === 'none') {
+            if (current.style.display.toLowerCase() === 'none') {
                 return false;
             }
-            current = el.parentElement;
-            console.log(current);
+            current = current.parentElement;
         } while (current);
         return true;
     }
