@@ -204,6 +204,7 @@ export abstract class sunSelectors {
         let current: HTMLElement | null = el;
 
         do {
+            console.log(current.style.display, current);
             if (current.style.display.toLowerCase() === 'none') {
                 return false;
             }
