@@ -185,12 +185,7 @@ export abstract class sunSelectors {
         } else {
             focusables = [...document.querySelectorAll<HTMLElement>(this.focusable)];
         }
-
-        focusables.filter((el: HTMLElement) => {
-            return this.isFocusable(el);
-        });
-
-        return focusables;
+        return focusables.filter((el: HTMLElement) => this.isFocusable(el));
     }
 
     /**
@@ -204,8 +199,7 @@ export abstract class sunSelectors {
         let current: HTMLElement | null = el;
 
         do {
-            console.log(current.style.display, current);
-            if (current.style.display.toLowerCase() === 'none') {
+            if (window.getComputedStyle(current).getPropertyValue('display').toLowerCase() === 'none') {
                 return false;
             }
             current = current.parentElement;
