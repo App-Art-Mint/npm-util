@@ -50,7 +50,7 @@
       "The prefix function requires a string value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -175,7 +175,7 @@
       "The css-prefix function requires a string value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -198,8 +198,8 @@
           "name": "css-var",
           "code": "\n    #{css-prefix($key)}: #{$val};\n",
           "line": {
-            "start": 418,
-            "end": 420
+            "start": 440,
+            "end": 442
           }
         }
       }
@@ -252,7 +252,7 @@
       "The css-var function requires a string value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -263,8 +263,8 @@
           "name": "css-var-ref",
           "code": "\n    @include css-var($key1, css-var($key2));\n",
           "line": {
-            "start": 431,
-            "end": 433
+            "start": 453,
+            "end": 455
           }
         }
       }
@@ -312,7 +312,7 @@
       "The neg function requires a string value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -367,7 +367,7 @@
       "The class function requires a string value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -433,7 +433,7 @@
       "The controls function requires a valid attribute comparison operator for param 2."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -491,7 +491,7 @@
       "The controls function requires a valid attribute comparison operator for param 2."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -537,7 +537,7 @@
       "The expanded function requires a boolean value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -583,7 +583,7 @@
       "The hidden function requires a boolean value. Received: "
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -629,7 +629,7 @@
       "The ms function requires a number value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -640,8 +640,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 385,
-            "end": 391
+            "start": 407,
+            "end": 413
           }
         }
       }
@@ -689,7 +689,7 @@
       "The px function requires a number value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -700,8 +700,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 401,
-            "end": 407
+            "start": 423,
+            "end": 429
           }
         }
       }
@@ -749,7 +749,7 @@
       "The strip-unit function requires a number value."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -760,8 +760,8 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 548,
-            "end": 573
+            "start": 570,
+            "end": 595
           }
         }
       },
@@ -772,26 +772,78 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 548,
-            "end": 573
+            "start": 570,
+            "end": 595
           }
         }
       }
     ]
   },
   {
-    "description": "Returns the requested delay value as ms\n",
+    "description": "Returns the percentage of the given values\n",
     "commentRange": {
       "start": 377,
-      "end": 384
+      "end": 387
+    },
+    "context": {
+      "type": "function",
+      "name": "percent",
+      "code": "\n    @if (type-of($dividend) != 'number' or type-of($divisor) != 'number') {\n        @error 'The percent function requires number parameters.';\n    }\n    @if ($divisor == 0) {\n        @error 'The percent function requires a non-zero value for param 2.';\n    }\n\n    @return math.div($dividend * 100%, $divisor);\n",
+      "line": {
+        "start": 388,
+        "end": 397
+      }
+    },
+    "group": [
+      "functions"
+    ],
+    "example": [
+      {
+        "type": "scss",
+        "code": "percent(100, 200) // -> 50%",
+        "description": "percent function"
+      }
+    ],
+    "parameter": [
+      {
+        "type": "Number",
+        "name": "dividend",
+        "description": "the value that will be devided"
+      },
+      {
+        "type": "Number",
+        "name": "divisor",
+        "description": "the value that will devided by"
+      }
+    ],
+    "return": {
+      "type": "Number",
+      "description": "the percentage of the given values"
+    },
+    "throw": [
+      "The percent function requires number parameters.",
+      "The percent function requires a non-zero value for param 2."
+    ],
+    "access": "public",
+    "require": [],
+    "file": {
+      "path": "imports/util.scss",
+      "name": "util.scss"
+    }
+  },
+  {
+    "description": "Returns the requested delay value as ms\n",
+    "commentRange": {
+      "start": 399,
+      "end": 406
     },
     "context": {
       "type": "function",
       "name": "delay",
       "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
       "line": {
-        "start": 385,
-        "end": 391
+        "start": 407,
+        "end": 413
       }
     },
     "group": [
@@ -838,23 +890,23 @@
       "The delay function requires one of the following values: #{map-keys($delay)}"
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
   {
     "description": "Returns the requested breakpoint value as px\n",
     "commentRange": {
-      "start": 393,
-      "end": 400
+      "start": 415,
+      "end": 422
     },
     "context": {
       "type": "function",
       "name": "break",
       "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
       "line": {
-        "start": 401,
-        "end": 407
+        "start": 423,
+        "end": 429
       }
     },
     "group": [
@@ -901,7 +953,7 @@
       "The break function requires one of the following values: #{map-keys($break)}"
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -912,8 +964,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       },
@@ -924,8 +976,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       },
@@ -936,8 +988,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       }
@@ -1002,7 +1054,7 @@
     ],
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1013,8 +1065,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 385,
-            "end": 391
+            "start": 407,
+            "end": 413
           }
         }
       },
@@ -1025,8 +1077,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 385,
-            "end": 391
+            "start": 407,
+            "end": 413
           }
         }
       },
@@ -1037,8 +1089,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 385,
-            "end": 391
+            "start": 407,
+            "end": 413
           }
         }
       }
@@ -1097,7 +1149,7 @@
     ],
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1108,8 +1160,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 401,
-            "end": 407
+            "start": 423,
+            "end": 429
           }
         }
       },
@@ -1120,8 +1172,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 401,
-            "end": 407
+            "start": 423,
+            "end": 429
           }
         }
       },
@@ -1132,8 +1184,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 401,
-            "end": 407
+            "start": 423,
+            "end": 429
           }
         }
       },
@@ -1144,8 +1196,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       },
@@ -1156,8 +1208,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       },
@@ -1168,8 +1220,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       },
@@ -1180,8 +1232,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 446,
-            "end": 460
+            "start": 468,
+            "end": 482
           }
         }
       },
@@ -1192,8 +1244,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 500,
-            "end": 526
+            "start": 522,
+            "end": 548
           }
         }
       }
@@ -1202,16 +1254,16 @@
   {
     "description": "Creates a prefixed CSS var definition\n",
     "commentRange": {
-      "start": 409,
-      "end": 417
+      "start": 431,
+      "end": 439
     },
     "context": {
       "type": "mixin",
       "name": "css-var",
       "code": "\n    #{css-prefix($key)}: #{$val};\n",
       "line": {
-        "start": 418,
-        "end": 420
+        "start": 440,
+        "end": 442
       }
     },
     "group": [
@@ -1245,7 +1297,7 @@
       }
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1256,8 +1308,8 @@
           "name": "css-var-ref",
           "code": "\n    @include css-var($key1, css-var($key2));\n",
           "line": {
-            "start": 431,
-            "end": 433
+            "start": 453,
+            "end": 455
           }
         }
       }
@@ -1266,16 +1318,16 @@
   {
     "description": "Creates a prefixed CSS var reference\n",
     "commentRange": {
-      "start": 422,
-      "end": 430
+      "start": 444,
+      "end": 452
     },
     "context": {
       "type": "mixin",
       "name": "css-var-ref",
       "code": "\n    @include css-var($key1, css-var($key2));\n",
       "line": {
-        "start": 431,
-        "end": 433
+        "start": 453,
+        "end": 455
       }
     },
     "group": [
@@ -1313,23 +1365,23 @@
       }
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
   {
     "description": "Wraps the provided content in a media query\n",
     "commentRange": {
-      "start": 435,
-      "end": 445
+      "start": 457,
+      "end": 467
     },
     "context": {
       "type": "mixin",
       "name": "break",
       "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
       "line": {
-        "start": 446,
-        "end": 460
+        "start": 468,
+        "end": 482
       }
     },
     "group": [
@@ -1391,7 +1443,7 @@
       "The break mixin requires one or two of the following values: #{map-keys($break)}"
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1402,8 +1454,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 500,
-            "end": 526
+            "start": 522,
+            "end": 548
           }
         }
       },
@@ -1414,8 +1466,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 500,
-            "end": 526
+            "start": 522,
+            "end": 548
           }
         }
       }
@@ -1424,16 +1476,16 @@
   {
     "description": "Creates utility selectors for a given property at each breakpoint\n",
     "commentRange": {
-      "start": 462,
-      "end": 499
+      "start": 484,
+      "end": 521
     },
     "context": {
       "type": "mixin",
       "name": "break-util",
       "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
       "line": {
-        "start": 500,
-        "end": 526
+        "start": 522,
+        "end": 548
       }
     },
     "group": [
@@ -1483,23 +1535,23 @@
       "The break-util mixin requires a string for the $prop argument."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
   {
     "description": "Generates a property with a fluid value between specified screen sizes\n",
     "commentRange": {
-      "start": 528,
-      "end": 547
+      "start": 550,
+      "end": 569
     },
     "context": {
       "type": "mixin",
       "name": "fluid",
       "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
       "line": {
-        "start": 548,
-        "end": 573
+        "start": 570,
+        "end": 595
       }
     },
     "group": [
@@ -1557,7 +1609,7 @@
       "The fluid mixin requires width and size arguments with the same units."
     ],
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1573,7 +1625,7 @@
       "value": "Number",
       "line": {
         "start": 102,
-        "end": 573
+        "end": 595
       }
     },
     "author": [
@@ -1584,7 +1636,7 @@
     ],
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1610,7 +1662,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1636,7 +1688,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1700,7 +1752,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1752,7 +1804,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1792,7 +1844,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     },
     "usedBy": [
@@ -1832,7 +1884,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1858,7 +1910,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1884,7 +1936,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1910,7 +1962,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1936,7 +1988,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1962,7 +2014,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -1988,7 +2040,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2014,7 +2066,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2040,7 +2092,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2066,7 +2118,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2092,7 +2144,7 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2118,7 +2170,7 @@
     "type": "Number",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2144,7 +2196,7 @@
     "type": "Number",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   },
@@ -2170,7 +2222,7 @@
     "type": "Boolean",
     "access": "public",
     "file": {
-      "path": "util.scss",
+      "path": "imports/util.scss",
       "name": "util.scss"
     }
   }

@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.1.31",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -18,45 +18,62 @@
   "bugs": {
     "url": "https://github.com/Sunder-Apps/util/issues"
   },
-  "main": "./dist/js/index.min.js",
-  "types": "./dist/js/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
+  "main": "dist/js/index.min.js",
+  "types": "dist/js/index.d.ts",
   "files": [
     "dist/**/*.{js,d.ts,map}",
     "src/scss/**/*.scss"
   ],
   "directories": {
-    "dist": "./dist",
-    "docs": "./docs",
-    "src": "./src"
+    "dist": "dist",
+    "doc": "docs",
+    "src": "src",
+    "test": "test"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "config": {
+    "webpack": "node_modules/@sunderapps/config/dist/js/webpack.config.min.js",
+    "dirs": {
+      "doc": "docs",
+      "test": "test",
+      "src": "src",
+      "config": "config",
+      "scss": "scss",
+      "ts": "ts",
+      "dist": "dist"
+    }
   },
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "npm run build:all",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
     "postversion": "git push && git push --tags",
-    "clean": "rimraf dist docs",
-    "build": "npm run build:dev && npm run build:prod && npm run build:index:dev && npm run build:index:prod && npm run build:tsdoc && npm run build:sassdoc",
-    "build:dev": "webpack --config webpack.config.dev.ts",
-    "build:prod": "webpack",
-    "build:index:dev": "webpack --config webpack.index.dev.ts",
-    "build:index:prod": "webpack --config webpack.index.ts",
+    "build:all": "npm run build && npm run build:prod && npm run build:index && npm run build:index:prod && npm run build:config && npm run build:config:prod && npm run build:tsdoc && npm run build:sassdoc",
+    "build": "webpack --config $npm_package_config_webpack",
+    "build:prod": "cross-env NODE_ENV=production npm run build",
+    "build:index": "cross-env BUILD_MODE=index npm run build",
+    "build:index:prod": "cross-env NODE_ENV=production BUILD_MODE=index npm run build",
+    "build:config": "cross-env BUILD_MODE=config npm run build",
+    "build:config:prod": "cross-env NODE_ENV=production BUILD_MODE=config npm run build",
     "build:tsdoc": "typedoc",
-    "build:sassdoc": "sassdoc ./src/scss -p > ./docs/sassdoc.json",
-    "watch": "npm run watch:dev",
-    "watch:dev": "webpack --watch --config webpack.config.dev.ts",
-    "watch:prod": "webpack --watch",
-    "watch:tsdoc": "typedoc --watch",
-    "test": "echo 'Run tests here'"
+    "build:sassdoc": "sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json",
+    "watch": "npm run build -- --watch",
+    "watch:prod": "cross-env NODE_ENV=production npm run watch",
+    "watch:tsdoc": "npm run build:tsdoc -- --watch",
+    "clean": "rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
+    "clear": "npm run clean",
+    "test": "echo '\nRun tests here!\n'"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
+    "@sunderapps/config": "^0.1.0",
     "@types/node": "^17.0.42",
     "@types/webpack": "^5.28.0",
     "babel-loader": "^8.2.5",
+    "cross-env": "^7.0.3",
     "jasmine-core": "^4.2.0",
     "karma": "^6.3.20",
     "karma-babel-preprocessor": "^8.0.2",
@@ -65,6 +82,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-typescript-preprocessor": "^0.4.0",
     "karma-webpack": "^5.0.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "rimraf": "^3.0.2",
     "sass": "^1.52.3",
     "sassdoc": "^2.7.4",
@@ -75,6 +93,8 @@
     "webpack": "^5.73.0",
     "webpack-cli": "^4.9.2",
     "webpack-lowercase-name": "^1.0.4",
-    "webpack-merge": "^5.8.0"
+    "webpack-node-externals": "^3.0.0",
+    "webpack-remove-empty-scripts": "^1.0.1",
+    "webpack-shebang-plugin": "^1.1.8"
   }
 }
