@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -24,6 +24,7 @@
   "main": "dist/js/index.min.js",
   "types": "dist/js/index.d.ts",
   "files": [
+    "src/scss/**/*.scss",
     "dist/**/*.{css,js,d.ts,map}"
   ],
   "directories": {
@@ -72,7 +73,7 @@
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
-    "@sunderapps/config": "^0.3.13",
+    "@sunderapps/config": "^0.3.15",
     "babel-loader": "^9.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
