@@ -2,13 +2,27 @@
  * Imports
  */
 import sunSettings from './settings';
-import { sunSide } from './imports/enums';
+import sunDisplay from './imports/display';
+import { sunSide } from './imports/enum';
+import sunEvent from './imports/event';
+import sunObject from './imports/object';
+import sunText from './imports/text';
+import sunWindow from './imports/window';
 
 /**
  * Utility functions
  * @public
  */
 export abstract class sunUtil {
+    /**
+     * Sub-utility functions
+     */
+    display: sunDisplay = sunDisplay;
+    event: sunEvent = sunEvent;
+    object: sunObject = sunObject;
+    text: sunText = sunText;
+    window: sunWindow = sunWindow;
+
     /**
      * Returns the width of the window, including fractional pixels
      * @returns the width of the window

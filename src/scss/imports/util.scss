@@ -385,14 +385,16 @@ $bootstrap5: false !default;
 /// @return {Number} - the percentage of the given values
 /// @throws {Error} - if the values are not numbers
 /// @throws {Error} - if the divisor is 0
-@function percent($dividend, $divisor) {
-    @if (type-of($dividend) != 'number' or type-of($divisor) != 'number') {
+@function percent($dividend, $divisor, $padding: 0) {
+    @if (type-of($dividend) != 'number' or type-of($divisor) != 'number' or type-of($padding) != 'number') {
         @error 'The percent function requires number parameters.';
     }
     @if ($divisor == 0) {
         @error 'The percent function requires a non-zero value for param 2.';
     }
-
+    @if (strip-unit($padding) != 0) {
+        @return calc((($dividend * 100%) - $padding) / $divisor) + '%';
+    }
     @return math.div($dividend * 100%, $divisor);
 }
 

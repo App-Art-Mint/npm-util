@@ -198,8 +198,8 @@
           "name": "css-var",
           "code": "\n    #{css-prefix($key)}: #{$val};\n",
           "line": {
-            "start": 440,
-            "end": 442
+            "start": 442,
+            "end": 444
           }
         }
       }
@@ -263,8 +263,8 @@
           "name": "css-var-ref",
           "code": "\n    @include css-var($key1, css-var($key2));\n",
           "line": {
-            "start": 453,
-            "end": 455
+            "start": 455,
+            "end": 457
           }
         }
       }
@@ -640,8 +640,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 407,
-            "end": 413
+            "start": 409,
+            "end": 415
           }
         }
       }
@@ -700,8 +700,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 423,
-            "end": 429
+            "start": 425,
+            "end": 431
           }
         }
       }
@@ -754,14 +754,14 @@
     },
     "usedBy": [
       {
-        "description": "Generates a property with a fluid value between specified screen sizes\n",
+        "description": "Returns the percentage of the given values\n",
         "context": {
-          "type": "mixin",
-          "name": "fluid",
-          "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
+          "type": "function",
+          "name": "percent",
+          "code": "\n    @if (type-of($dividend) != 'number' or type-of($divisor) != 'number' or type-of($padding) != 'number') {\n        @error 'The percent function requires number parameters.';\n    }\n    @if ($divisor == 0) {\n        @error 'The percent function requires a non-zero value for param 2.';\n    }\n    @if (strip-unit($padding) != 0) {\n        @return calc((($dividend * 100%) - $padding) / $divisor) + '%';\n    }\n    @return math.div($dividend * 100%, $divisor);\n",
           "line": {
-            "start": 570,
-            "end": 595
+            "start": 388,
+            "end": 399
           }
         }
       },
@@ -772,8 +772,20 @@
           "name": "fluid",
           "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
-            "start": 570,
-            "end": 595
+            "start": 572,
+            "end": 597
+          }
+        }
+      },
+      {
+        "description": "Generates a property with a fluid value between specified screen sizes\n",
+        "context": {
+          "type": "mixin",
+          "name": "fluid",
+          "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
+          "line": {
+            "start": 572,
+            "end": 597
           }
         }
       }
@@ -788,10 +800,10 @@
     "context": {
       "type": "function",
       "name": "percent",
-      "code": "\n    @if (type-of($dividend) != 'number' or type-of($divisor) != 'number') {\n        @error 'The percent function requires number parameters.';\n    }\n    @if ($divisor == 0) {\n        @error 'The percent function requires a non-zero value for param 2.';\n    }\n\n    @return math.div($dividend * 100%, $divisor);\n",
+      "code": "\n    @if (type-of($dividend) != 'number' or type-of($divisor) != 'number' or type-of($padding) != 'number') {\n        @error 'The percent function requires number parameters.';\n    }\n    @if ($divisor == 0) {\n        @error 'The percent function requires a non-zero value for param 2.';\n    }\n    @if (strip-unit($padding) != 0) {\n        @return calc((($dividend * 100%) - $padding) / $divisor) + '%';\n    }\n    @return math.div($dividend * 100%, $divisor);\n",
       "line": {
         "start": 388,
-        "end": 397
+        "end": 399
       }
     },
     "group": [
@@ -825,7 +837,12 @@
       "The percent function requires a non-zero value for param 2."
     ],
     "access": "public",
-    "require": [],
+    "require": [
+      {
+        "type": "function",
+        "name": "strip-unit"
+      }
+    ],
     "file": {
       "path": "imports/util.scss",
       "name": "util.scss"
@@ -834,16 +851,16 @@
   {
     "description": "Returns the requested delay value as ms\n",
     "commentRange": {
-      "start": 399,
-      "end": 406
+      "start": 401,
+      "end": 408
     },
     "context": {
       "type": "function",
       "name": "delay",
       "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
       "line": {
-        "start": 407,
-        "end": 413
+        "start": 409,
+        "end": 415
       }
     },
     "group": [
@@ -897,16 +914,16 @@
   {
     "description": "Returns the requested breakpoint value as px\n",
     "commentRange": {
-      "start": 415,
-      "end": 422
+      "start": 417,
+      "end": 424
     },
     "context": {
       "type": "function",
       "name": "break",
       "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
       "line": {
-        "start": 423,
-        "end": 429
+        "start": 425,
+        "end": 431
       }
     },
     "group": [
@@ -964,8 +981,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       },
@@ -976,8 +993,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       },
@@ -988,8 +1005,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       }
@@ -1065,8 +1082,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 407,
-            "end": 413
+            "start": 409,
+            "end": 415
           }
         }
       },
@@ -1077,8 +1094,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 407,
-            "end": 413
+            "start": 409,
+            "end": 415
           }
         }
       },
@@ -1089,8 +1106,8 @@
           "name": "delay",
           "code": "\n    @if not(map-has-key($delay, $key)) {\n        @error 'The delay function requires one of the following values: #{map-keys($delay)}';\n    }\n\n    @return ms(map-get($delay, $key));\n",
           "line": {
-            "start": 407,
-            "end": 413
+            "start": 409,
+            "end": 415
           }
         }
       }
@@ -1160,8 +1177,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 423,
-            "end": 429
+            "start": 425,
+            "end": 431
           }
         }
       },
@@ -1172,8 +1189,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 423,
-            "end": 429
+            "start": 425,
+            "end": 431
           }
         }
       },
@@ -1184,8 +1201,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $key)) {\n        @error 'The break function requires one of the following values: #{map-keys($break)}';\n    }\n\n    @return px(map-get($break, $key));\n",
           "line": {
-            "start": 423,
-            "end": 429
+            "start": 425,
+            "end": 431
           }
         }
       },
@@ -1196,8 +1213,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       },
@@ -1208,8 +1225,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       },
@@ -1220,8 +1237,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       },
@@ -1232,8 +1249,8 @@
           "name": "break",
           "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
           "line": {
-            "start": 468,
-            "end": 482
+            "start": 470,
+            "end": 484
           }
         }
       },
@@ -1244,8 +1261,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 522,
-            "end": 548
+            "start": 524,
+            "end": 550
           }
         }
       }
@@ -1254,16 +1271,16 @@
   {
     "description": "Creates a prefixed CSS var definition\n",
     "commentRange": {
-      "start": 431,
-      "end": 439
+      "start": 433,
+      "end": 441
     },
     "context": {
       "type": "mixin",
       "name": "css-var",
       "code": "\n    #{css-prefix($key)}: #{$val};\n",
       "line": {
-        "start": 440,
-        "end": 442
+        "start": 442,
+        "end": 444
       }
     },
     "group": [
@@ -1308,8 +1325,8 @@
           "name": "css-var-ref",
           "code": "\n    @include css-var($key1, css-var($key2));\n",
           "line": {
-            "start": 453,
-            "end": 455
+            "start": 455,
+            "end": 457
           }
         }
       }
@@ -1318,16 +1335,16 @@
   {
     "description": "Creates a prefixed CSS var reference\n",
     "commentRange": {
-      "start": 444,
-      "end": 452
+      "start": 446,
+      "end": 454
     },
     "context": {
       "type": "mixin",
       "name": "css-var-ref",
       "code": "\n    @include css-var($key1, css-var($key2));\n",
       "line": {
-        "start": 453,
-        "end": 455
+        "start": 455,
+        "end": 457
       }
     },
     "group": [
@@ -1372,16 +1389,16 @@
   {
     "description": "Wraps the provided content in a media query\n",
     "commentRange": {
-      "start": 457,
-      "end": 467
+      "start": 459,
+      "end": 469
     },
     "context": {
       "type": "mixin",
       "name": "break",
       "code": "\n    @if not(map-has-key($break, $min) and (type-of($max) == 'null' or map-has-key($break, $max))) {\n        @error 'The break mixin requires one or two of the following values: #{map-keys($break)}';\n    }\n\n    @if (map-has-key($break, $max)) {\n        @media (min-width: break($min)) and (max-width: break($max)) {\n            @content;\n        }\n    } @else {\n        @media (min-width: break($min)) {\n            @content;\n        }\n    }\n",
       "line": {
-        "start": 468,
-        "end": 482
+        "start": 470,
+        "end": 484
       }
     },
     "group": [
@@ -1454,8 +1471,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 522,
-            "end": 548
+            "start": 524,
+            "end": 550
           }
         }
       },
@@ -1466,8 +1483,8 @@
           "name": "break-util",
           "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
           "line": {
-            "start": 522,
-            "end": 548
+            "start": 524,
+            "end": 550
           }
         }
       }
@@ -1476,16 +1493,16 @@
   {
     "description": "Creates utility selectors for a given property at each breakpoint\n",
     "commentRange": {
-      "start": 484,
-      "end": 521
+      "start": 486,
+      "end": 523
     },
     "context": {
       "type": "mixin",
       "name": "break-util",
       "code": "\n    @if (type-of($prop) != 'string') {\n        @error 'The break-util mixin requires a string for the $prop argument.';\n    }\n\n    & {\n        #{$prop}: #{$val};\n\n        @each $key, $width in $break {\n            &-#{$key} {\n                #{$prop}: #{$none};\n\n                @include break($key) {\n                    #{$prop}: #{$val};\n                }\n            }\n\n            &-to-#{$key} {\n                #{$prop}: #{$val};\n\n                @include break($key) {\n                    #{$prop}: #{$none};\n                }\n            }\n        }\n    }\n",
       "line": {
-        "start": 522,
-        "end": 548
+        "start": 524,
+        "end": 550
       }
     },
     "group": [
@@ -1542,16 +1559,16 @@
   {
     "description": "Generates a property with a fluid value between specified screen sizes\n",
     "commentRange": {
-      "start": 550,
-      "end": 569
+      "start": 552,
+      "end": 571
     },
     "context": {
       "type": "mixin",
       "name": "fluid",
       "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
       "line": {
-        "start": 570,
-        "end": 595
+        "start": 572,
+        "end": 597
       }
     },
     "group": [
@@ -1625,7 +1642,7 @@
       "value": "Number",
       "line": {
         "start": 102,
-        "end": 595
+        "end": 597
       }
     },
     "author": [

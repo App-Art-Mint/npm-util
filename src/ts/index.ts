@@ -7,9 +7,13 @@
 /**
  * Exports
  */
-export { sunSide } from './imports/enums';
-export { default as sunColor } from './imports/color';
-export { default as sunSelectors } from './selectors';
-export { default as sunSettings } from './settings';
-export { default as sunUtil } from './util';
-export { default } from './util';
+export { sunColor } from './imports/color';
+export { sunDisplay } from './imports/display';
+export { sunSide } from './imports/enum';
+export { sunEvent } from './imports/event';
+export { sunObject } from './imports/object';
+export { sunText } from './imports/text';
+export { sunWindow } from './imports/window';
+export { sunSelectors } from './selectors';
+export { sunSettings } from './settings';
+export { sunUtil, default } from './util';
