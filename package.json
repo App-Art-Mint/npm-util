@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -50,7 +50,7 @@
     "prepare": "npm-run-all clean build build:**",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
-    "postversion": "git push && git push --tags",
+    "postversion": "git push && git push --tags && npm run endversion --if-present",
     "clean": "rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
     "clear": "npm run clean",
     "build": "webpack --config $npm_package_config_webpack",
@@ -65,13 +65,14 @@
     "watch": "npm run build -- --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
     "watch:tsdoc": "npm run build:tsdoc -- --watch",
-    "test": "echo '\nRun tests here!\n'"
+    "test": "echo '\nRun tests here!\n'",
+    "endversion": "echo '\nRemember to update @sunderapps/config with this new version!\n'"
   },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
-    "@sunderapps/config": "^0.3.7",
+    "@sunderapps/config": "^0.3.13",
     "babel-loader": "^9.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
