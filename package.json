@@ -1,7 +1,7 @@
 {
   "name": "@sunderapps/util",
   "author": "Samuel T Underwood",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "license": "MIT",
   "description": "Sunder Apps Utility Functions",
   "keywords": [
@@ -73,10 +73,11 @@
     "build:test": "cross-env NODE_ENV=development npm run build",
     "endversion": "echo '\nRemember to update @sunderapps/config/src/ts/bin/update.ts with this new version!\n'"
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
-    "@sunderapps/config": "^0.4.7",
+    "@sunderapps/config": "^0.5.0",
     "babel-loader": "^9.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
