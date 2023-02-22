@@ -17,3 +17,13 @@
         }
     }
 }
+
+/// CSS variables
+:root {
+    @include css-var(delay-instant, delay(instant));
+    @include css-var(delay-fast, delay(fast));
+    @include css-var(delay-med-fast, delay(med-fast));
+    @include css-var(delay-default, delay(default));
+    @include css-var(delay-med-slow, delay(med-slow));
+    @include css-var(delay-slow, delay(slow));
+}

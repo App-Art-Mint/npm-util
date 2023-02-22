@@ -1,6 +1,6 @@
 /// Imports
-@use 'util' as *;
-@use 'vars';
+@use '../util' as *;
+@use '../vars' as *;
 
 /// Global styles
 * {
@@ -10,14 +10,23 @@
 }
 
 html, body {
-    width: 100%;
-    min-height: calc(100vh - $nav-height);
-    margin: 0;
-    padding: 0;
     color: css-var(fore);
     background-color: css-var(back);
-    font-family: $font-primary, $font-backups;
     overflow-x: hidden;
+
+    &, main {
+        width: 100%;
+        min-height: calc(100vh - $nav-height);
+        margin: 0;
+        padding: 0;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1000;
 }
 
 a {

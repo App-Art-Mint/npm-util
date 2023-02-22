@@ -6,7 +6,7 @@
 
 /// Imports
 @use '../util' as *;
-@use '../vars';
+@use '../vars' as *;
 
 /// Global theme
 :root {
@@ -32,9 +32,8 @@
     @include css-var(instagram-6, $instagram-6);
 
     /// Application Colors
-    @include shades(black, $black, lighten);
-    @include shades(white, $white, darken);
-    @include shades(grey, $grey);
+    @include shades('black', $black, lighten);
+    @include shades('white', $white, darken);
     @include shades(trans, $trans, darken, 5, 10%, true);
 
     @include shades(brand, $brand);
@@ -46,7 +45,7 @@
 }
 
 /// Light theme
-@mixin theme {
+@mixin light-theme {
     @include css-var(fore, $fore);
     @include css-var(back, $back);
 }
@@ -64,4 +63,8 @@
     } @else {
         @include dark-theme;
     }
+}
+
+a {
+    color: css-var(brand);
 }
