@@ -585,6 +585,7 @@ $bootstrap5: false !default;
         @error 'The fluid mixin requires width and size arguments with the same units.';
     }
 
+    // See if you can get rid of this wrapping & selector
     & {
         #{$prop}: $min-size;
         @media (min-width: $min-vw) {
@@ -592,6 +593,56 @@ $bootstrap5: false !default;
         }
         @media (min-width: $max-vw) {
             #{$prop}: $max-size;
+        }
+    }
+}
+
+/// Generates css varibles for lighter, darker, or both variations
+/// @group Mixins
+///
+/// @param {String} $name - the name of the color
+/// @param {Color} $color - the color to generate variations for
+/// @param {String} $type - the type of variation to generate
+/// @param {Number} $number - the number of variations to generate
+/// @param {String} $amount - the amount to vary the color by
+/// @param {Boolean} $alpha - whether to generate alpha variations
+/// @output css variables for different shades of the source color
+@mixin shades ($name, $color, $type: both, $number: 5, $amount: 10%, $alpha: false) {
+    @if (type-of($name) != 'string') {
+        @error 'The shades mixin requires a string for the $name argument.';
+    }
+    @if (type-of($color) != 'color') {
+        @error 'The shades mixin requires a color for the $color argument.';
+    }
+    @if not($type == lighten or $type == darken or $type == both) {
+        @error 'The shades mixin requires a string of "lighten", "darken", or "both" for the $type argument.';
+    }
+    @if (type-of($number) != 'number') {
+        @error 'The shades mixin requires a number for the $number argument.';
+    }
+    @if (type-of($alpha) != 'boolean') {
+        @error 'The shades mixin requires a boolean for the $alpha argument.';
+    }
+
+    @include css-var(#{$name}, $color);
+
+    // TODO: Add alpha variations
+    @if ($type == lighten) {
+        @for $i from 1 through $number {
+            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));
+        }
+    } @else if ($type == darken) {
+        @for $i from 1 through $number {
+            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));
+        }
+    } @else if ($type == both) {
+        $num-light: floor($number / 2);
+        @for $i from 1 through $num-light {
+            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));
+        }
+        @include css-var(#{$name}-#{$num-light + 1}, $color);
+        @for $i from $num-light + 2 through $number {
+            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));
         }
     }
 }

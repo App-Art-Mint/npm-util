@@ -770,10 +770,10 @@
         "context": {
           "type": "mixin",
           "name": "fluid",
-          "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
+          "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    // See if you can get rid of this wrapping & selector\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
             "start": 572,
-            "end": 597
+            "end": 598
           }
         }
       },
@@ -782,10 +782,10 @@
         "context": {
           "type": "mixin",
           "name": "fluid",
-          "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
+          "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    // See if you can get rid of this wrapping & selector\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
           "line": {
             "start": 572,
-            "end": 597
+            "end": 598
           }
         }
       }
@@ -1329,6 +1329,126 @@
             "end": 457
           }
         }
+      },
+      {
+        "description": "Generates css varibles for lighter, darker, or both variations\n",
+        "context": {
+          "type": "mixin",
+          "name": "shades",
+          "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+          "line": {
+            "start": 610,
+            "end": 648
+          }
+        }
+      },
+      {
+        "description": "Generates css varibles for lighter, darker, or both variations\n",
+        "context": {
+          "type": "mixin",
+          "name": "shades",
+          "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+          "line": {
+            "start": 610,
+            "end": 648
+          }
+        }
+      },
+      {
+        "description": "Generates css varibles for lighter, darker, or both variations\n",
+        "context": {
+          "type": "mixin",
+          "name": "shades",
+          "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+          "line": {
+            "start": 610,
+            "end": 648
+          }
+        }
+      },
+      {
+        "description": "Generates css varibles for lighter, darker, or both variations\n",
+        "context": {
+          "type": "mixin",
+          "name": "shades",
+          "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+          "line": {
+            "start": 610,
+            "end": 648
+          }
+        }
+      },
+      {
+        "description": "Generates css varibles for lighter, darker, or both variations\n",
+        "context": {
+          "type": "mixin",
+          "name": "shades",
+          "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+          "line": {
+            "start": 610,
+            "end": 648
+          }
+        }
+      },
+      {
+        "description": "Generates css varibles for lighter, darker, or both variations\n",
+        "context": {
+          "type": "mixin",
+          "name": "shades",
+          "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+          "line": {
+            "start": 610,
+            "end": 648
+          }
+        }
+      },
+      {
+        "description": "Light theme\n",
+        "context": {
+          "type": "mixin",
+          "name": "theme",
+          "code": "\n    @include css-var(fore, $fore);\n    @include css-var(back, $back);\n",
+          "line": {
+            "start": 49,
+            "end": 52
+          }
+        }
+      },
+      {
+        "description": "Light theme\n",
+        "context": {
+          "type": "mixin",
+          "name": "theme",
+          "code": "\n    @include css-var(fore, $fore);\n    @include css-var(back, $back);\n",
+          "line": {
+            "start": 49,
+            "end": 52
+          }
+        }
+      },
+      {
+        "description": "Dark theme\n",
+        "context": {
+          "type": "mixin",
+          "name": "dark-theme",
+          "code": "\n    @include css-var(fore, $back);\n    @include css-var(back, $fore);\n",
+          "line": {
+            "start": 55,
+            "end": 58
+          }
+        }
+      },
+      {
+        "description": "Dark theme\n",
+        "context": {
+          "type": "mixin",
+          "name": "dark-theme",
+          "code": "\n    @include css-var(fore, $back);\n    @include css-var(back, $fore);\n",
+          "line": {
+            "start": 55,
+            "end": 58
+          }
+        }
       }
     ]
   },
@@ -1565,10 +1685,10 @@
     "context": {
       "type": "mixin",
       "name": "fluid",
-      "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
+      "code": "\n    $u1: unit($min-vw);\n    $u2: unit($max-vw);\n    $u3: unit($min-size);\n    $u4: unit($max-size);\n\n    @if (type-of($prop) != 'string') {\n        @error 'The fluid mixin requires a string for the $prop argument.';\n    }\n    @if not(type-of($u1) == 'string' and type-of($u2) == 'string' and type-of($u3) == 'string' and type-of($u4) == 'string') {\n        @error 'The fluid mixin requires numbers for the width and size arguments.';\n    }\n    @if not($u1 == $u2 and $u1 == $u3 and $u1 == $u4) {\n        @error 'The fluid mixin requires width and size arguments with the same units.';\n    }\n\n    // See if you can get rid of this wrapping & selector\n    & {\n        #{$prop}: $min-size;\n        @media (min-width: $min-vw) {\n            #{$prop}: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));\n        }\n        @media (min-width: $max-vw) {\n            #{$prop}: $max-size;\n        }\n    }\n",
       "line": {
         "start": 572,
-        "end": 597
+        "end": 598
       }
     },
     "group": [
@@ -1631,6 +1751,386 @@
     }
   },
   {
+    "description": "Generates css varibles for lighter, darker, or both variations\n",
+    "commentRange": {
+      "start": 600,
+      "end": 609
+    },
+    "context": {
+      "type": "mixin",
+      "name": "shades",
+      "code": "\n    @if (type-of($name) != 'string') {\n        @error 'The shades mixin requires a string for the $name argument.';\n    }\n    @if (type-of($color) != 'color') {\n        @error 'The shades mixin requires a color for the $color argument.';\n    }\n    @if not($type == lighten or $type == darken or $type == both) {\n        @error 'The shades mixin requires a string of \"lighten\", \"darken\", or \"both\" for the $type argument.';\n    }\n    @if (type-of($number) != 'number') {\n        @error 'The shades mixin requires a number for the $number argument.';\n    }\n    @if (type-of($alpha) != 'boolean') {\n        @error 'The shades mixin requires a boolean for the $alpha argument.';\n    }\n\n    @include css-var(#{$name}, $color);\n\n    // TODO: Add alpha variations\n    @if ($type == lighten) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n    } @else if ($type == darken) {\n        @for $i from 1 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));\n        }\n    } @else if ($type == both) {\n        $num-light: floor($number / 2);\n        @for $i from 1 through $num-light {\n            @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));\n        }\n        @include css-var(#{$name}-#{$num-light + 1}, $color);\n        @for $i from $num-light + 2 through $number {\n            @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));\n        }\n    }\n",
+      "line": {
+        "start": 610,
+        "end": 648
+      }
+    },
+    "group": [
+      "mixins"
+    ],
+    "parameter": [
+      {
+        "type": "String",
+        "name": "name",
+        "description": "the name of the color"
+      },
+      {
+        "type": "Color",
+        "name": "color",
+        "description": "the color to generate variations for"
+      },
+      {
+        "type": "String",
+        "name": "type",
+        "description": "the type of variation to generate"
+      },
+      {
+        "type": "Number",
+        "name": "number",
+        "description": "the number of variations to generate"
+      },
+      {
+        "type": "String",
+        "name": "amount",
+        "description": "the amount to vary the color by"
+      },
+      {
+        "type": "Boolean",
+        "name": "alpha",
+        "description": "whether to generate alpha variations"
+      }
+    ],
+    "output": "css variables for different shades of the source color",
+    "access": "public",
+    "require": [
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      }
+    ],
+    "throw": [
+      "The shades mixin requires a string for the $name argument.",
+      "The shades mixin requires a color for the $color argument.",
+      "The shades mixin requires a string of ",
+      "The shades mixin requires a number for the $number argument.",
+      "The shades mixin requires a boolean for the $alpha argument."
+    ],
+    "file": {
+      "path": "imports/util.scss",
+      "name": "util.scss"
+    }
+  },
+  {
+    "description": "Global styles\n",
+    "commentRange": {
+      "start": 5,
+      "end": 5
+    },
+    "context": {
+      "type": "css",
+      "name": "*",
+      "value": "&, &::before, &::after {\n        box-sizing: border-box;\n    }",
+      "line": {
+        "start": 6,
+        "end": 31
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/global/global.scss",
+      "name": "global.scss"
+    }
+  },
+  {
+    "description": "Global theme\n",
+    "commentRange": {
+      "start": 11,
+      "end": 11
+    },
+    "context": {
+      "type": "css",
+      "name": ":root",
+      "value": "/// Global Colors\n    /// Brands\n    @include css-var(facebook, $facebook);\n    @include css-var(youtube, $youtube);\n    @include css-var(itunes, $itunes);\n    @include css-var(spotify, $spotify);\n    @include css-var(amazon-0, $amazon-0);\n    @include css-var(amazon-1, $amazon-1);\n    @include css-var(napster-0, $napster-0);\n    @include css-var(napster-1, $napster-1);\n    @include css-var(google-play-0, $google-play-0);\n    @include css-var(google-play-1, $google-play-1);\n    @include css-var(google-play-2, $google-play-2);\n    @include css-var(instagram-0, $instagram-0);\n    @include css-var(instagram-1, $instagram-1);\n    @include css-var(instagram-2, $instagram-2);\n    @include css-var(instagram-3, $instagram-3);\n    @include css-var(instagram-4, $instagram-4);\n    @include css-var(instagram-5, $instagram-5);\n    @include css-var(instagram-6, $instagram-6);\n\n    /// Application Colors\n    @include shades(black, $black, lighten);\n    @include shades(white, $white, darken);\n    @include shades(grey, $grey);\n    @include shades(trans, $trans, darken, 5, 10%, true);\n\n    @include shades(brand, $brand);\n    @include shades(accent, $accent);\n    @include shades(success, $success);\n    @include shades(danger, $danger);\n    @include shades(warning, $warning);\n    @include shades(info, $info);",
+      "line": {
+        "start": 12,
+        "end": 67
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/global/themes.scss",
+      "name": "themes.scss"
+    }
+  },
+  {
+    "description": "Light theme\n",
+    "commentRange": {
+      "start": 48,
+      "end": 48
+    },
+    "context": {
+      "type": "mixin",
+      "name": "theme",
+      "code": "\n    @include css-var(fore, $fore);\n    @include css-var(back, $back);\n",
+      "line": {
+        "start": 49,
+        "end": 52
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "require": [
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      }
+    ],
+    "file": {
+      "path": "imports/global/themes.scss",
+      "name": "themes.scss"
+    }
+  },
+  {
+    "description": "Dark theme\n",
+    "commentRange": {
+      "start": 54,
+      "end": 54
+    },
+    "context": {
+      "type": "mixin",
+      "name": "dark-theme",
+      "code": "\n    @include css-var(fore, $back);\n    @include css-var(back, $fore);\n",
+      "line": {
+        "start": 55,
+        "end": 58
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "require": [
+      {
+        "type": "mixin",
+        "name": "css-var"
+      },
+      {
+        "type": "mixin",
+        "name": "css-var"
+      }
+    ],
+    "file": {
+      "path": "imports/global/themes.scss",
+      "name": "themes.scss"
+    }
+  },
+  {
+    "description": "Apply themes\n",
+    "commentRange": {
+      "start": 60,
+      "end": 60
+    },
+    "context": {
+      "type": "css",
+      "name": ":root",
+      "value": "@if ($theme-default == light) {\n        @include light-theme;\n    } @else {\n        @include dark-theme;\n    }",
+      "line": {
+        "start": 61,
+        "end": 67
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/global/themes.scss",
+      "name": "themes.scss"
+    }
+  },
+  {
+    "description": "Global Colors\n",
+    "commentRange": {
+      "start": 10,
+      "end": 10
+    },
+    "context": {
+      "type": "variable",
+      "name": "facebook",
+      "value": "#3b5998",
+      "scope": "private",
+      "line": {
+        "start": 11,
+        "end": 11
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/vars.scss",
+      "name": "vars.scss"
+    }
+  },
+  {
+    "description": "Application Colors\n",
+    "commentRange": {
+      "start": 30,
+      "end": 30
+    },
+    "context": {
+      "type": "variable",
+      "name": "black",
+      "value": "#000",
+      "scope": "default",
+      "line": {
+        "start": 31,
+        "end": 31
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/vars.scss",
+      "name": "vars.scss"
+    }
+  },
+  {
+    "description": "Fonts\n",
+    "commentRange": {
+      "start": 46,
+      "end": 46
+    },
+    "context": {
+      "type": "variable",
+      "name": "font-primary",
+      "value": "'Palanquin'",
+      "scope": "default",
+      "line": {
+        "start": 47,
+        "end": 47
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/vars.scss",
+      "name": "vars.scss"
+    }
+  },
+  {
+    "description": "Font Sizes\n",
+    "commentRange": {
+      "start": 51,
+      "end": 51
+    },
+    "context": {
+      "type": "variable",
+      "name": "font-size-mobile",
+      "value": "(\n    h1: 2.5rem,\n    h2: 2rem,\n    h3: 1.75rem,\n    h4: 1.5rem,\n    h5: 1.25rem,\n    h6: 1.125rem,\n    p: 1rem,\n)",
+      "scope": "default",
+      "line": {
+        "start": 52,
+        "end": 60
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/vars.scss",
+      "name": "vars.scss"
+    }
+  },
+  {
+    "description": "Structure\n",
+    "commentRange": {
+      "start": 71,
+      "end": 71
+    },
+    "context": {
+      "type": "variable",
+      "name": "nav-height",
+      "value": "4rem",
+      "scope": "default",
+      "line": {
+        "start": 72,
+        "end": 72
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/vars.scss",
+      "name": "vars.scss"
+    }
+  },
+  {
+    "description": "Default theme\n",
+    "commentRange": {
+      "start": 74,
+      "end": 74
+    },
+    "context": {
+      "type": "variable",
+      "name": "theme-default",
+      "value": "light",
+      "scope": "default",
+      "line": {
+        "start": 75,
+        "end": 75
+      }
+    },
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "imports/vars.scss",
+      "name": "vars.scss"
+    }
+  },
+  {
     "description": "util.scss - Variables, Functions, and Mixins to import elsewhere\n",
     "commentRange": {
       "start": 1,
@@ -1642,7 +2142,7 @@
       "value": "Number",
       "line": {
         "start": 102,
-        "end": 597
+        "end": 649
       }
     },
     "author": [

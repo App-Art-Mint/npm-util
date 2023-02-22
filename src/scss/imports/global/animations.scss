@@ -1,0 +1,19 @@
+/// animations.scss - Global animations
+/// @author Sam Underwood
+/// 
+/// @group Animations
+@charset 'utf-8';
+
+/// Imports
+@use '../util' as *;
+
+/// Animations
+/// Cycle through instagram colors
+@keyframes instafade {
+    @for $i from 0 through 6 {
+        $percent: percentage($i / 6);
+        #{$percent} {
+            color: css-var(instagram-#{$i});
+        }
+    }
+}
