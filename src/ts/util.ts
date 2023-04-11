@@ -1,27 +1,27 @@
 /**
  * Imports
  */
-import sunSettings from './settings';
-import sunDisplay from './imports/display';
-import { sunSide } from './imports/enum';
-import sunEvent from './imports/event';
-import sunObject from './imports/object';
-import sunText from './imports/text';
-import sunWindow from './imports/window';
+import mintSettings from './settings';
+import mintDisplay from './imports/display';
+import { mintSide } from './imports/enum';
+import mintEvent from './imports/event';
+import mintObject from './imports/object';
+import mintText from './imports/text';
+import mintWindow from './imports/window';
 
 /**
  * Utility functions
  * @public
  */
-export abstract class sunUtil {
+export abstract class mintUtil {
     /**
      * Sub-utility functions
      */
-    display: sunDisplay = sunDisplay;
-    event: sunEvent = sunEvent;
-    object: sunObject = sunObject;
-    text: sunText = sunText;
-    window: sunWindow = sunWindow;
+    display: mintDisplay = mintDisplay;
+    event: mintEvent = mintEvent;
+    object: mintObject = mintObject;
+    text: mintText = mintText;
+    window: mintWindow = mintWindow;
 
     /**
      * Returns the width of the window, including fractional pixels
@@ -39,7 +39,7 @@ export abstract class sunUtil {
      * @param wait - the amount of time to wait before running the function
      * @returns - the debounced function
      */
-     static debounce (func: Function, wait: number = sunSettings.delay.default) : Function {
+     static debounce (func: Function, wait: number = mintSettings.delay.default) : Function {
         let timer: number;
         return function (e: any) {
             if (timer) {
@@ -55,8 +55,8 @@ export abstract class sunUtil {
      * @param wait - the amount of time to wait before running the function
      * @returns - the debounced function as an EventListener
      */
-     static debounceEvent (func: Function, wait: number = sunSettings.delay.default) : EventListener {
-        return sunUtil.debounce(func, wait) as EventListener;
+     static debounceEvent (func: Function, wait: number = mintSettings.delay.default) : EventListener {
+        return mintUtil.debounce(func, wait) as EventListener;
     }
 
     /**
@@ -67,7 +67,7 @@ export abstract class sunUtil {
      * @returns - the throttled function
      */
     static throttle (func: Function,
-                     wait: number = sunSettings.delay.default,
+                     wait: number = mintSettings.delay.default,
                      options?: {[key: string]: boolean}) : Function {
         let context: any, args: any, result: any,
             timeout: number, previous: number = 0,
@@ -114,9 +114,9 @@ export abstract class sunUtil {
      * @returns - the throttled function as an EventListener
      */
     static throttleEvent (func: Function,
-                          wait: number = sunSettings.delay.default,
+                          wait: number = mintSettings.delay.default,
                           options?: {[key: string]: boolean}) : EventListener {
-        return sunUtil.throttle(func, wait, options) as EventListener;
+        return mintUtil.throttle(func, wait, options) as EventListener;
     }
 
     /**
@@ -125,18 +125,18 @@ export abstract class sunUtil {
      * @param delay - the amount of time in milliseconds that the show animation will be active
      * @param from - the side that the element is animating from
      */
-    static show (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
+    static show (el?: HTMLElement | null, delay: number = mintSettings.delay.default, from: mintSide = mintSide.Top) : void {
         if (el) {
             el.style.display = '';
             requestAnimationFrame(() => {
-                if (from === sunSide.Top || from === sunSide.Bottom) {
+                if (from === mintSide.Top || from === mintSide.Bottom) {
                     el.style.height = `${el.scrollHeight}px`;
                 } else {
                     el.style.width = `${el.scrollWidth}px`;
                 }
                 
                 setTimeout(() => {
-                    if (from === sunSide.Top || from === sunSide.Bottom) {
+                    if (from === mintSide.Top || from === mintSide.Bottom) {
                         el.style.height = 'auto';
                     } else {
                         el.style.width = 'auto';
@@ -152,14 +152,14 @@ export abstract class sunUtil {
      * @param delay - the amount of time in milliseconds that the show animation will be active
      * @param from - the side that the element is animating from
      */
-    static hide (el?: HTMLElement | null, delay: number = sunSettings.delay.default, from: sunSide = sunSide.Top) : void {
+    static hide (el?: HTMLElement | null, delay: number = mintSettings.delay.default, from: mintSide = mintSide.Top) : void {
         if (el) {
             let height = el.scrollHeight,
                 width = el.scrollWidth,
                 transition = el.style.transition;
             el.style.transition = '';
             requestAnimationFrame(() => {
-                if (from === sunSide.Top || from === sunSide.Bottom) {
+                if (from === mintSide.Top || from === mintSide.Bottom) {
                     el.style.height = `${height}px`;
                 } else {
                     el.style.width = `${width}px`;
@@ -167,7 +167,7 @@ export abstract class sunUtil {
                 
                 el.style.transition = transition;
                 requestAnimationFrame(() => {
-                    if (from === sunSide.Top || from === sunSide.Bottom) {
+                    if (from === mintSide.Top || from === mintSide.Bottom) {
                         el.style.height = '0';
                     } else {
                         el.style.width = '0';
@@ -221,4 +221,4 @@ export abstract class sunUtil {
         return null !== text.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/);
     }
 }
-export default sunUtil;
+export default mintUtil;

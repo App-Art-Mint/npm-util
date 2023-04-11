@@ -1,7 +1,7 @@
 /**
  * Functions for analyzing and manipulating text.
  */
-export abstract class sunText {
+export abstract class mintText {
 
 };
-export default sunText;
+export default mintText;

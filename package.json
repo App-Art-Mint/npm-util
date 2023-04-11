@@ -1,25 +1,24 @@
 {
-  "name": "@sunderapps/util",
-  "author": "Samuel T Underwood",
-  "version": "0.5.0",
+  "name": "@appartmint/util",
+  "author": "App/Art Mint",
+  "version": "0.6.0",
   "license": "MIT",
-  "description": "Sunder Apps Utility Functions",
+  "description": "App/Art Mint Utility Functions",
   "keywords": [
-    "sunderapps",
-    "sunder-apps",
-    "sunder",
+    "appartmint",
+    "app-art-mint",
     "functions",
     "mixins",
     "utility",
     "variables"
   ],
-  "homepage": "https://github.com/Sunder-Apps/util#readme",
+  "homepage": "https://github.com/App-Art-Mint/npm-util#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sunder-Apps/util.git"
+    "url": "git+https://github.com/App-Art-Mint/npm-util.git"
   },
   "bugs": {
-    "url": "https://github.com/Sunder-Apps/util/issues"
+    "url": "https://github.com/App-Art-Mint/npm-util/issues"
   },
   "main": "dist/js/index.min.js",
   "types": "dist/js/index.d.ts",
@@ -43,11 +42,11 @@
       "scss": "scss",
       "dist": "dist"
     },
-    "webpack": "node_modules/@sunderapps/config/dist/js/webpack.config.min.js"
+    "webpack": "node_modules/@appartmint/config/dist/js/webpack.config.min.js"
   },
   "scripts": {
-    "update": "npm up -D @sunderapps/config && sunderapps-config",
-    "upgrade": "npm i -D @sunderapps/config && sunderapps-config",
+    "update": "npm up -D @appartmint/config && mint-config",
+    "upgrade": "npm i -D @appartmint/config && mint-config",
     "prepare": "npm-run-all clean build build:**",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
@@ -71,13 +70,12 @@
     "bitch:index": "cross-env BUILD_MODE=index npm run bitch",
     "bitch:prod": "cross-env NODE_ENV=production npm run bitch",
     "build:test": "cross-env NODE_ENV=development npm run build",
-    "endversion": "echo '\nRemember to update @sunderapps/config/src/ts/bin/update.ts with this new version!\n'"
+    "endversion": "echo '\nRemember to update @appartmint/config/src/ts/bin/update.ts with this new version!\n'"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@appartmint/config": "^0.6.0",
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
-    "@sunderapps/config": "^0.5.0",
     "babel-loader": "^9.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",

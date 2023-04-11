@@ -1,7 +1,7 @@
 /**
  * Handles the display of elements
  */
-export abstract class sunDisplay {
+export abstract class mintDisplay {
 
 };
-export default sunDisplay;
+export default mintDisplay;

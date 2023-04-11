@@ -1,9 +1,9 @@
 /**
  * Side Enum
  */
- export enum sunSide {
+ export enum mintSide {
     Top,
     Right,
     Bottom,
     Left
-}
+};

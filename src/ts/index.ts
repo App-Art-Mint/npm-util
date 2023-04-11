@@ -7,13 +7,13 @@
 /**
  * Exports
  */
-export { sunColor } from './imports/color';
-export { sunDisplay } from './imports/display';
-export { sunSide } from './imports/enum';
-export { sunEvent } from './imports/event';
-export { sunObject } from './imports/object';
-export { sunText } from './imports/text';
-export { sunWindow } from './imports/window';
-export { sunSelectors } from './selectors';
-export { sunSettings } from './settings';
-export { sunUtil, default } from './util';
+export { mintColor } from './imports/color';
+export { mintDisplay } from './imports/display';
+export { mintSide } from './imports/enum';
+export { mintEvent } from './imports/event';
+export { mintObject } from './imports/object';
+export { mintText } from './imports/text';
+export { mintWindow } from './imports/window';
+export { mintSelectors } from './selectors';
+export { mintSettings } from './settings';
+export { mintUtil, default } from './util';

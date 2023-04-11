@@ -2,11 +2,11 @@
  * CSS-selector helpers
  * @public
  */
-export abstract class sunSelectors {
+export abstract class mintSelectors {
     /**
      * The library name that will be added as a prefix
      */
-    static lib: string = 'sun';
+    static lib: string = 'mint';
 
     /**
      * The prefix built from the library name
@@ -207,4 +207,4 @@ export abstract class sunSelectors {
         return true;
     }
 }
-export default sunSelectors;
+export default mintSelectors;

@@ -1,7 +1,7 @@
 /**
  * Color
  */
-export class sunColor {
+export class mintColor {
     protected static hexBase: number = 16;
     protected static hexMax: string = 'FF';
     public r: number;
@@ -10,9 +10,9 @@ export class sunColor {
     public a: number;
 
     constructor (args: {[key: string]: number | string}) {
-        this.r = typeof args.r === 'number' ? Math.max(Math.min(args.r, sunColor.hexBase ** 2 - 1), 0) : 0;
-        this.g = typeof args.g === 'number' ? Math.max(Math.min(args.g, sunColor.hexBase ** 2 - 1), 0) : 0;
-        this.b = typeof args.b === 'number' ? Math.max(Math.min(args.b, sunColor.hexBase ** 2 - 1), 0) : 0;
+        this.r = typeof args.r === 'number' ? Math.max(Math.min(args.r, mintColor.hexBase ** 2 - 1), 0) : 0;
+        this.g = typeof args.g === 'number' ? Math.max(Math.min(args.g, mintColor.hexBase ** 2 - 1), 0) : 0;
+        this.b = typeof args.b === 'number' ? Math.max(Math.min(args.b, mintColor.hexBase ** 2 - 1), 0) : 0;
         this.a = typeof args.a === 'number' ? Math.max(Math.min(args.a, 1), 0) : 1;
         if (typeof args.color === 'string') {
             this.stringConstructor(args.color);
@@ -43,16 +43,16 @@ export class sunColor {
             case 6:
                 return;
             case 2:
-                hex = '#' + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + sunColor.hexMax;
+                hex = '#' + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + hex[1] + mintColor.hexMax;
                 break;
             case 3:
-                hex = '#' + hex[1] + hex[1] + hex[1] + hex[2] + hex[2] + hex[2] + sunColor.hexMax;
+                hex = '#' + hex[1] + hex[1] + hex[1] + hex[2] + hex[2] + hex[2] + mintColor.hexMax;
                 break;
             case 4:
-                hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3] + sunColor.hexMax;
+                hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3] + mintColor.hexMax;
                 break;
             case 7:
-                hex += sunColor.hexMax;
+                hex += mintColor.hexMax;
                 break;
             case 8:
                 hex += hex[hex.length - 1];
@@ -61,10 +61,10 @@ export class sunColor {
                 hex = hex.substring(0, 9);
         }
 
-        this.r = parseInt(hex.substring(1, 3), sunColor.hexBase);
-        this.g = parseInt(hex.substring(3, 5), sunColor.hexBase);
-        this.b = parseInt(hex.substring(5, 7), sunColor.hexBase);
-        this.a = parseInt(hex.substring(7, 9), sunColor.hexBase) / sunColor.hexBase ** 2;
+        this.r = parseInt(hex.substring(1, 3), mintColor.hexBase);
+        this.g = parseInt(hex.substring(3, 5), mintColor.hexBase);
+        this.b = parseInt(hex.substring(5, 7), mintColor.hexBase);
+        this.a = parseInt(hex.substring(7, 9), mintColor.hexBase) / mintColor.hexBase ** 2;
     }
 
     /**
@@ -93,4 +93,4 @@ export class sunColor {
         return -1;
     }
 }
-export default sunColor;
+export default mintColor;
