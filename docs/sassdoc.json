@@ -2266,7 +2266,7 @@
     },
     "context": {
       "type": "css",
-      "name": "/// Imports\n@use 'sass:color';\n@use 'sass:math';\n@use 'sass:string';\n\n/// Library name\n/// @group Variables\n/// @type String\n$lib: sun !default;\n\n/// Dash - variable name separator\n/// @group Variables\n/// @type String\n$dash: #{'-'};\n\n/// Prefix added to selectors\n/// @group Variables\n/// @type String\n$pre: #{$lib}#{$dash};\n\n/// Dot - added to classes\n/// @group Variables\n/// @type String\n$dot: #{'.'};\n\n/// Hash - added to ids\n/// @group Variables\n/// @type String\n$hash: #{'#'};\n\n/// CSS-selector for disabled elements\n/// @group Variables\n/// @type String\n$disabled: #{'[disabled]'};\n\n/// CSS-selector for elements with an aria-controls attribute\n/// @group Variables\n/// @type String\n$has-controls: #{'[aria-controls]'};\n\n/// CSS-selector for elements with an aria-expanded attribute\n/// @group Variables\n/// @type String\n$has-expanded: #{'[aria-expanded]'};\n\n/// CSS-selector for elements with an aria-hidden attribute\n/// @group Variables\n/// @type String\n$has-hidden: #{'[aria-hidden]'};\n\n/// CSS-selector for elements with an href attribute\n/// @group Variables\n/// @type String\n$has-link: #{'[href]'};\n\n/// CSS-selector for elements with a routerLink attribute\n/// @group Variables\n/// @type String\n$has-router-link: #{'[routerLink]'};\n\n/// CSS-selector for elements with an id attribute\n/// @group Variables\n/// @type String\n$has-id: #{'[id]'};\n\n/// CSS-selector for elements that aren't tabbable (i.e. tabindex is negative)\n/// @group Variables\n/// @type String\n$not-tabbable: #{'[tabindex^=\"-\"]'};\n\n/// CSS-selector for elements that are tabbable (i.e. tabindex isn't negative)\n/// @group Variables\n/// @type String\n$tabbable: #{'[tabindex]'}#{neg($not-tabbable)};\n\n/// CSS-selector for submenu buttons\n/// @group Variables\n/// @type String\n$sub-menu-buttons: #{'button'}#{$has-controls};\n\n/// CSS-selector for submenus\n/// @group Variables\n/// @type String\n$sub-menu: #{$sub-menu-buttons}#{' + ul'}#{$has-id};\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-base: 0 !default;\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-step: 100 !default;\n\n/// Delay variables\n/// @group Maps\n/// @prop",
+      "name": "/// Imports\n@use 'sass:color';\n@use 'sass:math';\n@use 'sass:string';\n\n/// Library name\n/// @group Variables\n/// @type String\n$lib: mint !default;\n\n/// Dash - variable name separator\n/// @group Variables\n/// @type String\n$dash: #{'-'};\n\n/// Prefix added to selectors\n/// @group Variables\n/// @type String\n$pre: #{$lib}#{$dash};\n\n/// Dot - added to classes\n/// @group Variables\n/// @type String\n$dot: #{'.'};\n\n/// Hash - added to ids\n/// @group Variables\n/// @type String\n$hash: #{'#'};\n\n/// CSS-selector for disabled elements\n/// @group Variables\n/// @type String\n$disabled: #{'[disabled]'};\n\n/// CSS-selector for elements with an aria-controls attribute\n/// @group Variables\n/// @type String\n$has-controls: #{'[aria-controls]'};\n\n/// CSS-selector for elements with an aria-expanded attribute\n/// @group Variables\n/// @type String\n$has-expanded: #{'[aria-expanded]'};\n\n/// CSS-selector for elements with an aria-hidden attribute\n/// @group Variables\n/// @type String\n$has-hidden: #{'[aria-hidden]'};\n\n/// CSS-selector for elements with an href attribute\n/// @group Variables\n/// @type String\n$has-link: #{'[href]'};\n\n/// CSS-selector for elements with a routerLink attribute\n/// @group Variables\n/// @type String\n$has-router-link: #{'[routerLink]'};\n\n/// CSS-selector for elements with an id attribute\n/// @group Variables\n/// @type String\n$has-id: #{'[id]'};\n\n/// CSS-selector for elements that aren't tabbable (i.e. tabindex is negative)\n/// @group Variables\n/// @type String\n$not-tabbable: #{'[tabindex^=\"-\"]'};\n\n/// CSS-selector for elements that are tabbable (i.e. tabindex isn't negative)\n/// @group Variables\n/// @type String\n$tabbable: #{'[tabindex]'}#{neg($not-tabbable)};\n\n/// CSS-selector for submenu buttons\n/// @group Variables\n/// @type String\n$sub-menu-buttons: #{'button'}#{$has-controls};\n\n/// CSS-selector for submenus\n/// @group Variables\n/// @type String\n$sub-menu: #{$sub-menu-buttons}#{' + ul'}#{$has-id};\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-base: 0 !default;\n\n/// Value added to all delay variables\n/// @group Variables\n/// @type Number\n$delay-step: 100 !default;\n\n/// Delay variables\n/// @group Maps\n/// @prop",
       "value": "Number",
       "line": {
         "start": 103,
@@ -2274,7 +2274,7 @@
       }
     },
     "author": [
-      "Sam Underwood - Sunder Apps"
+      "App/Art Mint"
     ],
     "group": [
       "util"
@@ -2294,7 +2294,7 @@
     "context": {
       "type": "variable",
       "name": "lib",
-      "value": "sun",
+      "value": "mint",
       "scope": "default",
       "line": {
         "start": 14,

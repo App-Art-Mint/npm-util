@@ -1,7 +1,7 @@
 /**
  * Event helper functions
  */
-export abstract class sunEvent {
+export abstract class mintEvent {
 
 };
-export default sunEvent;
+export default mintEvent;

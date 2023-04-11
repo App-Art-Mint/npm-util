@@ -1,7 +1,7 @@
 /**
  * Functions related to the browser window.
  */
-export abstract class sunWindow {
+export abstract class mintWindow {
 
 };
-export default sunWindow;
+export default mintWindow;

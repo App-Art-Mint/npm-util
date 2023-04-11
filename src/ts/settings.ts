@@ -2,7 +2,7 @@
  * Settings management
  * @public
  */
-export abstract class sunSettings {
+export abstract class mintSettings {
     /**
      * Value added to all delay variables
      */
@@ -65,4 +65,4 @@ export abstract class sunSettings {
     }
 }
 
-export default sunSettings;
+export default mintSettings;

@@ -1,7 +1,7 @@
 /**
  * Object functions for the util library
  */
-export abstract class sunObject {
+export abstract class mintObject {
     /**
      * Returns true if the provided objects have the same entries
      */
@@ -51,7 +51,7 @@ export abstract class sunObject {
         // If the children of the subset are subsets of the
         // respective children of the superset, it is a superset
         Object.keys(subset).forEach((key: string) => {
-            isSuperset = isSuperset && sunObject.isSuperset(superset[key], subset[key]);
+            isSuperset = isSuperset && mintObject.isSuperset(superset[key], subset[key]);
         });
         return isSuperset;
     };
@@ -79,7 +79,7 @@ export abstract class sunObject {
     };
 
     /**
-     * @alias sunObject.filterKeys
+     * @alias mintObject.filterKeys
      */
     static filter (object: any, keys: string[]) : Object {
         return this.filterKeys(object, keys);
@@ -113,4 +113,4 @@ export abstract class sunObject {
         }, {});
     };
 };
-export default sunObject;
+export default mintObject;
