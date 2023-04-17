@@ -67,7 +67,6 @@
     "test": "echo '\nRun tests here!\n'",
     "endversion": "echo '\nRemember to update @appartmint/config/src/ts/bin/update.ts with this new version!\n'"
   },
-  "dependencies": {},
   "devDependencies": {
     "@appartmint/config": "^0.6.3",
     "@babel/core": "^7.19.6",

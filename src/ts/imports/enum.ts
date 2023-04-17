@@ -6,4 +6,4 @@
     Right,
     Bottom,
     Left
-}
+};
