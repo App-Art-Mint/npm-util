@@ -608,7 +608,7 @@ $bootstrap5: false !default;
 /// @param {String} $amount - the amount to vary the color by
 /// @param {Boolean} $alpha - whether to generate alpha variations
 /// @output css variables for different shades of the source color
-@mixin shades ($name, $color, $type: both, $number: 5, $amount: 10%, $alpha: false) {
+@mixin shades ($name, $color, $type: both, $number: 7, $amount: 10%, $alpha: false) {
     @if (type-of($name) != 'string') {
         @error 'The shades mixin requires a string for the $name argument.';
     }
@@ -643,13 +643,13 @@ $bootstrap5: false !default;
                 @include css-var(#{$name}-#{$i}, color.adjust($color, $alpha: $i * math.div($amount, 100%)));
             }
         } @else if ($type == both) {
-            $num-light: floor($number / 2);
+            $num-light: floor(math.div($number, 2));
             @for $i from 0 through $num-light - 1 {
                 @include css-var(#{$name}-#{$i}, color.adjust($color, $alpha: -$i * math.div($amount, 100%)));
             }
             @include css-var(#{$name}-#{$num-light}, $color);
             @for $i from $num-light + 1 through $number - 1 {
-                @include css-var(#{$name}-#{$i}, color.adjust($color, $alpha: $i * math.div($amount, 100%)));
+                @include css-var(#{$name}-#{$i}, color.adjust($color, $alpha: ($num-light - $i) * math.div($amount, 100%)));
             }
         }
     } @else {
@@ -662,14 +662,52 @@ $bootstrap5: false !default;
                 @include css-var(#{$name}-#{$i}, darken($color, $i * $amount));
             }
         } @else if ($type == both) {
-            $num-light: floor($number / 2);
+            $num-light: floor(math.div($number, 2));
             @for $i from 0 through $num-light - 1 {
-                @include css-var(#{$name}-#{$i}, lighten($color, $i * $amount));
+                @include css-var(#{$name}-#{$i}, lighten($color, ($num-light - $i) * $amount));
             }
             @include css-var(#{$name}-#{$num-light}, $color);
             @for $i from $num-light + 1 through $number - 1 {
                 @include css-var(#{$name}-#{$i}, darken($color, ($i - $num-light) * $amount));
             }
+        }
+    }
+}
+
+/// TODO: Document this
+@mixin states ($states...) {
+    @each $state in $states {
+        @if (type-of($state) != 'string') {
+            @error 'The states mixin requires a string for each state argument.';
+        }
+        @if not($state == 'hover' or $state == 'focus' or $state == 'active' or $state == 'visited' or $state == 'disabled') {
+            @error 'The states mixin requires a string of "hover", "focus", "active", "visited", or "disabled" for each state argument.';
+        }
+    }
+
+    @if (index($states, 'hover') != null) {
+        &:hover {
+            @content;
+        }
+    }
+    @if (index($states, 'focus') != null) {
+        &:focus {
+            @content;
+        }
+    }
+    @if (index($states, 'active') != null) {
+        &:active, &#{class(active)} {
+            @content;
+        }
+    }
+    @if (index($states, 'visited') != null) {
+        &:visited {
+            @content;
+        }
+    }
+    @if (index($states, 'disabled') != null) {
+        &:disabled {
+            @content;
         }
     }
 }
