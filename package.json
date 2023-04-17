@@ -1,7 +1,7 @@
 {
   "name": "@appartmint/util",
   "author": "App/Art Mint",
-  "version": "0.6.0",
+  "version": "0.7.1",
   "license": "MIT",
   "description": "App/Art Mint Utility Functions",
   "keywords": [
@@ -45,8 +45,7 @@
     "webpack": "node_modules/@appartmint/config/dist/js/webpack.config.min.js"
   },
   "scripts": {
-    "update": "npm up -D @appartmint/config && mint-config",
-    "upgrade": "npm i -D @appartmint/config && mint-config",
+    "upgrade": "npm up -D @appartmint/config && mint-config",
     "prepare": "npm-run-all clean build build:**",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
@@ -66,14 +65,10 @@
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
     "watch:tsdoc": "npm run build:tsdoc -- --watch",
     "test": "echo '\nRun tests here!\n'",
-    "bitch": "echo $NODE_ENV && echo $BUILD_MODE",
-    "bitch:index": "cross-env BUILD_MODE=index npm run bitch",
-    "bitch:prod": "cross-env NODE_ENV=production npm run bitch",
-    "build:test": "cross-env NODE_ENV=development npm run build",
     "endversion": "echo '\nRemember to update @appartmint/config/src/ts/bin/update.ts with this new version!\n'"
   },
   "devDependencies": {
-    "@appartmint/config": "^0.6.0",
+    "@appartmint/config": "^0.6.3",
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
     "babel-loader": "^9.0.1",
