@@ -5,6 +5,7 @@ import mintSettings from './settings';
 import mintDisplay from './imports/display';
 import { mintSide } from './imports/enum';
 import mintEvent from './imports/event';
+import mintMath from './imports/math';
 import mintObject from './imports/object';
 import mintText from './imports/text';
 import mintWindow from './imports/window';
@@ -19,6 +20,7 @@ export abstract class mintUtil {
      */
     display: mintDisplay = mintDisplay;
     event: mintEvent = mintEvent;
+    math: mintMath = mintMath;
     object: mintObject = mintObject;
     text: mintText = mintText;
     window: mintWindow = mintWindow;

@@ -11,6 +11,7 @@ export { mintColor } from './imports/color';
 export { mintDisplay } from './imports/display';
 export { mintSide } from './imports/enum';
 export { mintEvent } from './imports/event';
+export { mintMath } from './imports/math';
 export { mintObject } from './imports/object';
 export { mintText } from './imports/text';
 export { mintWindow } from './imports/window';
