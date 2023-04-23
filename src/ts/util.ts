@@ -18,12 +18,12 @@ export abstract class mintUtil {
     /**
      * Sub-utility functions
      */
-    display: mintDisplay = mintDisplay;
-    event: mintEvent = mintEvent;
-    math: mintMath = mintMath;
-    object: mintObject = mintObject;
-    text: mintText = mintText;
-    window: mintWindow = mintWindow;
+    static display: mintDisplay = mintDisplay;
+    static event: mintEvent = mintEvent;
+    static math: mintMath = mintMath;
+    static object: mintObject = mintObject;
+    static text: mintText = mintText;
+    static window: mintWindow = mintWindow;
 
     /**
      * Returns the width of the window, including fractional pixels
