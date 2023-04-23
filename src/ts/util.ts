@@ -1,14 +1,14 @@
 /**
  * Imports
  */
-import mintSettings from './settings';
-import mintDisplay from './imports/display';
 import { mintSide } from './imports/enum';
-import mintEvent from './imports/event';
-import mintMath from './imports/math';
-import mintObject from './imports/object';
-import mintText from './imports/text';
-import mintWindow from './imports/window';
+import mintDisplay from './imports/util/display';
+import mintEvent from './imports/util/event';
+import mintMath from './imports/util/math';
+import mintObject from './imports/util/object';
+import mintText from './imports/util/text';
+import mintWindow from './imports/util/window';
+import mintSettings from './settings';
 
 /**
  * Utility functions
@@ -18,12 +18,24 @@ export abstract class mintUtil {
     /**
      * Sub-utility functions
      */
-    static display: mintDisplay = mintDisplay;
-    static event: mintEvent = mintEvent;
-    static math: mintMath = mintMath;
-    static object: mintObject = mintObject;
-    static text: mintText = mintText;
-    static window: mintWindow = mintWindow;
+    static get display (): mintDisplay {
+        return mintDisplay;
+    };
+    static get event (): mintEvent {
+        return mintEvent;
+    };
+    static get math (): mintMath {
+        return mintMath;
+    };
+    static get object (): mintObject {
+        return mintObject;
+    };
+    static get text (): mintText {
+        return mintText;
+    };
+    static get window (): mintWindow {
+        return mintWindow;
+    };
 
     /**
      * Returns the width of the window, including fractional pixels
@@ -41,7 +53,7 @@ export abstract class mintUtil {
      * @param wait - the amount of time to wait before running the function
      * @returns - the debounced function
      */
-     static debounce (func: Function, wait: number = mintSettings.delay.default) : Function {
+    static debounce (func: Function, wait: number = mintSettings.delay.default) : Function {
         let timer: number;
         return function (e: any) {
             if (timer) {
@@ -57,7 +69,7 @@ export abstract class mintUtil {
      * @param wait - the amount of time to wait before running the function
      * @returns - the debounced function as an EventListener
      */
-     static debounceEvent (func: Function, wait: number = mintSettings.delay.default) : EventListener {
+    static debounceEvent (func: Function, wait: number = mintSettings.delay.default) : EventListener {
         return mintUtil.debounce(func, wait) as EventListener;
     }
 

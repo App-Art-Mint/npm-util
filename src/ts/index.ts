@@ -8,13 +8,13 @@
  * Exports
  */
 export { mintColor } from './imports/color';
-export { mintDisplay } from './imports/display';
 export { mintSide } from './imports/enum';
-export { mintEvent } from './imports/event';
-export { mintMath } from './imports/math';
-export { mintObject } from './imports/object';
-export { mintText } from './imports/text';
-export { mintWindow } from './imports/window';
+export { mintDisplay } from './imports/util/display';
+export { mintEvent } from './imports/util/event';
+export { mintMath } from './imports/util/math';
+export { mintObject } from './imports/util/object';
+export { mintText } from './imports/util/text';
+export { mintWindow } from './imports/util/window';
 export { mintSelectors } from './selectors';
 export { mintSettings } from './settings';
 export { mintUtil, default } from './util';

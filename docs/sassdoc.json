@@ -50,8 +50,8 @@
       "The prefix function requires a string value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -175,8 +175,8 @@
       "The css-prefix function requires a string value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -252,8 +252,8 @@
       "The css-var function requires a string value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -312,8 +312,8 @@
       "The neg function requires a string value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -367,8 +367,8 @@
       "The class function requires a string value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -447,8 +447,8 @@
       "The controls function requires a valid attribute comparison operator for param 2."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -505,8 +505,8 @@
       "The controls function requires a valid attribute comparison operator for param 2."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -551,8 +551,8 @@
       "The expanded function requires a boolean value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -597,8 +597,8 @@
       "The hidden function requires a boolean value. Received: "
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -643,8 +643,8 @@
       "The ms function requires a number value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -703,8 +703,8 @@
       "The px function requires a number value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -763,8 +763,8 @@
       "The strip-unit function requires a number value."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -858,8 +858,8 @@
       }
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -921,8 +921,8 @@
       "The delay function requires one of the following values: #{map-keys($delay)}"
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -984,8 +984,8 @@
       "The break function requires one of the following values: #{map-keys($break)}"
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -1085,8 +1085,8 @@
     ],
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -1180,8 +1180,8 @@
     ],
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -1328,8 +1328,8 @@
       }
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -1528,8 +1528,8 @@
       }
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1606,8 +1606,8 @@
       "The break mixin requires one or two of the following values: #{map-keys($break)}"
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -1698,8 +1698,8 @@
       "The break-util mixin requires a string for the $prop argument."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1772,8 +1772,8 @@
       "The fluid mixin requires width and size arguments with the same units."
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1882,8 +1882,8 @@
       "The shades mixin requires a boolean value for the $alpha argument. Received: "
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1917,8 +1917,8 @@
       "The states mixin requires a string of "
     ],
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1944,8 +1944,8 @@
     ],
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1970,8 +1970,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -1996,8 +1996,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -2060,8 +2060,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -2112,8 +2112,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -2152,8 +2152,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     },
     "usedBy": [
       {
@@ -2192,8 +2192,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2218,8 +2218,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2244,8 +2244,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2270,8 +2270,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2296,8 +2296,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2322,8 +2322,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2348,8 +2348,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2374,8 +2374,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2400,8 +2400,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2426,8 +2426,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2452,8 +2452,8 @@
     "type": "String",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2478,8 +2478,8 @@
     "type": "Number",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2504,8 +2504,8 @@
     "type": "Number",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   },
   {
@@ -2530,8 +2530,8 @@
     "type": "Boolean",
     "access": "public",
     "file": {
-      "path": "imports/util.scss",
-      "name": "util.scss"
+      "path": "imports/_util.scss",
+      "name": "_util.scss"
     }
   }
 ]
