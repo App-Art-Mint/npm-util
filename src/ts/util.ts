@@ -2,12 +2,6 @@
  * Imports
  */
 import { mintSide } from './imports/enum';
-import mintDisplay from './imports/util/display';
-import mintEvent from './imports/util/event';
-import mintMath from './imports/util/math';
-import mintObject from './imports/util/object';
-import mintText from './imports/util/text';
-import mintWindow from './imports/util/window';
 import mintSettings from './settings';
 
 /**
@@ -15,28 +9,6 @@ import mintSettings from './settings';
  * @public
  */
 export abstract class mintUtil {
-    /**
-     * Sub-utility functions
-     */
-    static get display (): mintDisplay {
-        return mintDisplay;
-    };
-    static get event (): mintEvent {
-        return mintEvent;
-    };
-    static get math (): mintMath {
-        return mintMath;
-    };
-    static get object (): mintObject {
-        return mintObject;
-    };
-    static get text (): mintText {
-        return mintText;
-    };
-    static get window (): mintWindow {
-        return mintWindow;
-    };
-
     /**
      * Returns the width of the window, including fractional pixels
      * @returns the width of the window
