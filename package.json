@@ -59,7 +59,7 @@
     "build:config": "cross-env BUILD_MODE=config npm run build",
     "build:config:prod": "cross-env NODE_ENV=production BUILD_MODE=config npm run build",
     "build:tsdoc": "typedoc",
-    "build:sassdoc": "./node_modules/.bin/sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json",
+    "build:sassdoc": "sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json",
     "serve": "webpack serve --config $npm_package_config_webpack",
     "watch": "npm run build -- --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
