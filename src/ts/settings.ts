@@ -44,7 +44,7 @@ export abstract class mintSettings {
         }
 
         if (settings.delay && Object.keys(settings.delay).length) {
-            if (Object.values(settings.delay).reduce((prev, next) => prev && typeof next === 'number', true)) {
+            if (Object.values(settings.delay).reduce((prev: any, next: any) => prev && typeof next === 'number', true)) {
                 this.delay = {...this.delay, ...settings.delay};
             }
         }
@@ -63,6 +63,6 @@ export abstract class mintSettings {
             slow: this.delayBase + this.delayStep * 5
         };
     }
-}
+};
 
 export default mintSettings;
