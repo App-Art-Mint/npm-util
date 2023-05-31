@@ -1,4 +1,9 @@
 /**
+ * Imports
+ */
+import mintObject from "./object";
+
+/**
  * Icon helper functions
  */
 export abstract class mintIcon {
@@ -16,7 +21,7 @@ export abstract class mintIcon {
     /**
      * Appends the given icon to the given selector
      */
-    static append (icon: string, selector: string) : void {
+    static append (icon: string, selector: string): void {
         let items: NodeListOf<HTMLElement> = document.querySelectorAll(selector);
         items.forEach((item: HTMLElement) => {
             let currentIcon: HTMLElement | null = item.querySelector('i'),
@@ -27,6 +32,21 @@ export abstract class mintIcon {
             } else {
                 item.appendChild(iconElement);
             }
+        });
+    }
+
+    /**
+     * Updates the icons
+     * @param icons - the icons to update
+     */
+    static update (icons?: {[key: string]: string | false}): void {
+        let activeIcons: {[key: string]: string} = mintObject.removeValues({
+            ...this.icons,
+            ...icons
+        }, [false]);
+
+        Object.keys(activeIcons).forEach((selector: string) => {
+            this.append(activeIcons[selector], selector);
         });
     }
 };

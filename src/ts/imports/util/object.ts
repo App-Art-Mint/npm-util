@@ -71,7 +71,7 @@ export abstract class mintObject {
      * @param object - the object to remove entries from
      * @param keys - the keys to remove
      */
-    static removeKeys (object: any, keys: string[]) : Object {
+    static removeKeys (object: any, keys: string[]) : any {
         return Object.keys(object).reduce((obj: any, key: string) => {
             if (!keys.includes(key)) {
                 obj[key] = object[key];
@@ -83,7 +83,7 @@ export abstract class mintObject {
     /**
      * Removes object entries by value
      */
-    static removeValues (object: any, values: any[]) : Object {
+    static removeValues (object: any, values: any[]) : any {
         return Object.keys(object).reduce((obj: any, key: string) => {
             if (!values.includes(object[key])) {
                 obj[key] = object[key];
