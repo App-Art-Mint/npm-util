@@ -14,6 +14,7 @@ export { mintItem } from './imports/models/item';
 
 export { mintDisplay } from './imports/util/display';
 export { mintEvent } from './imports/util/event';
+export { mintIcon } from './imports/util/icon';
 export { mintMath } from './imports/util/math';
 export { mintObject } from './imports/util/object';
 export { mintText } from './imports/util/text';
