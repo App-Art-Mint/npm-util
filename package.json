@@ -1,7 +1,7 @@
 {
   "name": "@appartmint/util",
   "author": "App/Art Mint",
-  "version": "0.8.13",
+  "version": "0.9.0",
   "license": "MIT",
   "description": "App/Art Mint Utility Functions",
   "keywords": [
@@ -20,11 +20,11 @@
   "bugs": {
     "url": "https://github.com/App-Art-Mint/npm-util/issues"
   },
-  "main": "dist/js/index.min.js",
-  "types": "dist/js/index.d.ts",
+  "main": "src/ts/index.ts",
+  "type": "module",
   "files": [
-    "src/scss/**/*.scss",
-    "dist/**/*.{css,js,d.ts,map}"
+    "dist/**/*.{css,js,d.ts,map}",
+    "src/**/*.{ts,scss}"
   ],
   "directories": {
     "dist": "dist",
@@ -46,35 +46,39 @@
   },
   "scripts": {
     "upgrade": "npm up -D @appartmint/config && mint-config",
-    "prepare": "npm-run-all clean build build:**",
+    "prepare": "npm-run-all clean bundle",
     "preversion": "npm i && npm run test",
     "version": "npm publish && git add -A",
     "postversion": "git push && git push --tags && npm run endversion --if-present",
-    "clean": "rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
+    "clean": "cross-var rimraf $npm_package_config_dirs_dist $npm_package_config_dirs_doc",
     "clear": "npm run clean",
-    "build": "webpack --config $npm_package_config_webpack",
+    "bundle": "npm-run-all build build:**",
+    "build": "cross-var webpack --config $npm_package_config_webpack",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "build:index": "cross-env BUILD_MODE=index npm run build",
     "build:index:prod": "cross-env NODE_ENV=production BUILD_MODE=index npm run build",
     "build:config": "cross-env BUILD_MODE=config npm run build",
     "build:config:prod": "cross-env NODE_ENV=production BUILD_MODE=config npm run build",
     "build:tsdoc": "typedoc",
-    "build:sassdoc": "sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json",
-    "serve": "webpack serve --config $npm_package_config_webpack",
+    "build:sassdoc": "cross-var sassdoc $npm_package_config_dirs_src/$npm_package_config_dirs_scss -p > $npm_package_config_dirs_doc/sassdoc.json",
+    "serve": "cross-var webpack serve --config $npm_package_config_webpack",
     "watch": "npm run build -- --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
     "watch:tsdoc": "npm run build:tsdoc -- --watch",
-    "test": "echo '\nRun tests here!\n'",
+    "test": "echo-cli \"\\nRun tests here!\\n\"",
     "endversion": "echo '\nRemember to update @appartmint/config/src/ts/bin/update.ts with this new version!\n'"
   },
+  "dependencies": {},
   "devDependencies": {
-    "@appartmint/config": "^0.6.3",
+    "@appartmint/config": "^0.7.0",
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
     "babel-loader": "^9.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
+    "cross-var": "^1.1.0",
     "css-loader": "^6.7.1",
+    "echo-cli": "^2.0.0",
     "jasmine-core": "^4.5.0",
     "karma": "^6.4.1",
     "karma-babel-preprocessor": "^8.0.2",
