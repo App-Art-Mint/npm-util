@@ -2,7 +2,7 @@
  * Settings management
  * @public
  */
-export abstract class mintSettings {
+export abstract class MintSettings {
     /**
      * Value added to all delay variables
      */
@@ -23,6 +23,18 @@ export abstract class mintSettings {
         default: this.delayBase + this.delayStep * 3,
         medSlow: this.delayBase + this.delayStep * 4,
         slow: this.delayBase + this.delayStep * 5
+    };
+
+    /**
+     * Breakpoint variables
+     */
+    static break: {[key: string]: number} = {
+        z: 0,
+        xs: 480,
+        sm: 768,
+        md: 1024,
+        lg: 1200,
+        xl: 1440
     };
 
     /**
@@ -48,6 +60,12 @@ export abstract class mintSettings {
                 this.delay = {...this.delay, ...settings.delay};
             }
         }
+
+        if (settings.break && Object.keys(settings.break).length) {
+            if (Object.values(settings.break).reduce((prev: any, next: any) => prev && typeof next === 'number', true)) {
+                this.break = {...this.break, ...settings.break};
+            }
+        }
     }
 
     /**
@@ -64,5 +82,4 @@ export abstract class mintSettings {
         };
     }
 };
-
-export default mintSettings;
+export default MintSettings;

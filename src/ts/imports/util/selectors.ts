@@ -2,7 +2,7 @@
  * CSS-selector helpers
  * @public
  */
-export abstract class mintSelectors {
+export abstract class MintSelectors {
     /**
      * The library name that will be added as a prefix
      */
@@ -66,21 +66,14 @@ export abstract class mintSelectors {
                                 ${this.tabbable}`.replace(/\s/g, '');
 
     /**
-     * Ids
+     * CSS-selector for submenu buttons
      */
-    static ids: {[key: string]: string | {[key: string]: string}};
+    static subMenuButtons: string = `button${this.hasControls}`;
 
     /**
-     * Classes
+     * CSS-selector for submenus
      */
-    static classes: {[key: string]: string | {[key: string]: string}} = {
-        sides: {
-            top: this.prefix('top'),
-            right: this.prefix('right'),
-            bottom: this.prefix('bottom'),
-            left: this.prefix('left')
-        }
-    };
+    static subMenu: string = `${this.subMenuButtons} + ul${this.hasId}`;
 
     /**
      * Adds the library prefix to the beginning of the provided string
@@ -156,24 +149,6 @@ export abstract class mintSelectors {
     }
 
     /**
-     * Returns the id of the requested element
-     */
-    static getId (id?: string) : string {
-        return this.ids[id ?? -1] as string ?? '';
-    }
-
-    /**
-     * Returns the class of the requested element
-     */
-    static getClass (className?: string, classGroup?: string) : string {
-        if (classGroup) {
-            let group: {[key: string]: string} = this.classes[classGroup] as {[key: string]: string};
-            return group[className ?? -1] ?? '';
-        }
-        return this.classes[className ?? -1] as string ?? '';
-    }
-
-    /**
      * Returns a NodeList of HTMLElements within the given element that are focusable
      * @param el - the element whose focusable children will be returned
      * @returns - the elements within the given element that are focusable
@@ -181,9 +156,9 @@ export abstract class mintSelectors {
     static getFocusables (el?: HTMLElement) : HTMLElement[] {
         let focusables: HTMLElement[];
         if (el) {
-            focusables = [...el.querySelectorAll<HTMLElement>(this.focusable)];
+            focusables = Array.from(el.querySelectorAll<HTMLElement>(this.focusable));
         } else {
-            focusables = [...document.querySelectorAll<HTMLElement>(this.focusable)];
+            focusables = Array.from(document.querySelectorAll<HTMLElement>(this.focusable));
         }
         return focusables.filter((el: HTMLElement) => this.isFocusable(el));
     }
@@ -206,5 +181,5 @@ export abstract class mintSelectors {
         } while (current);
         return true;
     }
-}
-export default mintSelectors;
+};
+export default MintSelectors;

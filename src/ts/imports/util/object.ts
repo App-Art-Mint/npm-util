@@ -1,7 +1,7 @@
 /**
  * Object functions for the util library
  */
-export abstract class mintObject {
+export abstract class MintObject {
     /**
      * Returns true if the provided objects have the same entries
      */
@@ -10,13 +10,14 @@ export abstract class mintObject {
         if (keys.length !== Object.keys(obj2).length) {
             return false;
         }
+        let isSimilar: boolean = true;
         keys.forEach((key: string) => {
             if (obj1[key] !== obj2[key]) {
-                return false;
+                isSimilar = false;
             }
         });
-        return true;
-    };
+        return isSimilar;
+    }
 
     /**
      * Returns true if the first object has at least the same
@@ -51,10 +52,10 @@ export abstract class mintObject {
         // If the children of the subset are subsets of the
         // respective children of the superset, it is a superset
         Object.keys(subset).forEach((key: string) => {
-            isSuperset = isSuperset && mintObject.isSuperset(superset[key], subset[key]);
+            isSuperset = isSuperset && MintObject.isSuperset(superset[key], subset[key]);
         });
         return isSuperset;
-    };
+    }
 
     /**
      * Removes object entries by key
@@ -64,7 +65,7 @@ export abstract class mintObject {
      */
     static remove (object: any, keys: string[]) : Object {
         return this.removeKeys(object, keys);
-    };
+    }
 
     /**
      * Removes object entries by key
@@ -78,7 +79,7 @@ export abstract class mintObject {
             }
             return obj;
         }, {});
-    };
+    }
 
     /**
      * Removes object entries by value
@@ -90,24 +91,41 @@ export abstract class mintObject {
             }
             return obj;
         }, {});
-    };
+    }
     
     /**
      * Sorts an object's entries alphabetically by key
      */
-    static sort (object: any) : Object {
-        return Object.keys(object).sort().reduce((obj: any, key: string) => {
+    static sort (object: any, compareFn?: (a: string, b: string) => number) : any {
+        return this.sortKeys(object, compareFn);
+    }
+
+    /**
+     * Sorts an object's entries alphabetically by key
+     */
+    static sortKeys (object: any, compareFn?: (a: string, b: string) => number) : any {
+        return Object.keys(object).sort(compareFn).reduce((obj: any, key: string) => {
             obj[key] = object[key];
             return obj;
         }, {});
-    };
+    }
+
+    /**
+     * Sorts an object's entries alphabetically by value
+     */
+    static sortValues (object: any, compareFn: (a: any, b: any) => number) : any {
+        return Object.keys(object).sort((a: string, b: string) => compareFn(object[a], object[b])).reduce((obj: any, key: string) => {
+            obj[key] = object[key];
+            return obj;
+        }, {});
+    }
 
     /**
      * @alias mintObject.filterKeys
      */
     static filter (object: any, keys: string[]) : Object {
         return this.filterKeys(object, keys);
-    };
+    }
 
     /**
      * Filters an object by its keys
@@ -120,7 +138,7 @@ export abstract class mintObject {
             obj[key] = object[key];
             return obj;
         }, {});
-    };
+    }
 
     /**
      * Filters an object by its values
@@ -135,6 +153,82 @@ export abstract class mintObject {
             }
             return obj;
         }, {});
-    };
+    }
+
+    /**
+     * Update two sets of objects
+     * @param original - the original object
+     * @param update - the object to update the original with
+     * @returns - the original objects with updated data from the update
+     */
+    static updateArray (original: any[], update?: any[], key = 'id') : any {
+        
+        // If there are no originals, push the updates
+        if (!update?.length) {
+            update?.forEach((object) => original.push(object));
+        
+        // If there are existing objects
+        } else {
+
+            // Create a dictionary of the updated objects
+            const updateObjects = update.reduce<{ [key: string]: Object }>((objects, object) => ({
+                ...objects,
+                [object?.[key] ?? '']: object
+            }), {});
+
+            // Remove any objects that aren't in the updated objects
+            const missingObjects = original.filter((object) => !updateObjects[object?.[key] ?? '']);
+            missingObjects?.forEach((object) => {
+                const index = original.indexOf(object);
+                if (typeof index == 'number' && index !== -1) {
+                    original.splice(index, 1);
+                }
+            });
+
+            // Update the existing objects with updates
+            original.forEach((object) => {
+                if (updateObjects[object?.[key] ?? '']) {
+                    Object.assign(object, updateObjects[object?.[key] ?? '']);
+                }
+            });
+        }
+
+        // Push any new objects
+        const newObjects = update?.filter((object) => !original.some((existingObject) => existingObject?.[key] === object?.[key]));
+        newObjects?.forEach(newObject => original.push(newObject));
+    }
+
+	/**
+	 * Get an object's key by value
+	 */
+	static getKeyByValue(object: any, value: any): string | undefined {
+		return Object.keys(object).find((key) => object[key] === value);
+	}
+
+	/**
+	 * Create a deep copy of an object
+	 * @recursive
+	 */
+	static deepClone(object: any): any {
+
+		// Clone every property
+		const clone: any = {};
+		for (const key in object) {
+
+			// Functions
+			if (typeof object[key] === 'function') {
+				clone[key] = object[key].bind(clone);
+
+			// Objects
+			} else if (object[key] && typeof object[key] === 'object') {
+				clone[key] = this.deepClone(object[key]);
+			
+			// Primitives
+			} else {
+				clone[key] = object[key];
+			}
+		}
+		return clone;
+	}
 };
-export default mintObject;
+export default MintObject;
